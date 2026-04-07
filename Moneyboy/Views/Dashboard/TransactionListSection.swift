@@ -6,43 +6,64 @@ struct TransactionListSection: View {
     let onTap: (FinanceItem) -> Void
     let onToggleExcluded: (FinanceItem) -> Void
 
+    private var subtotal: Double {
+        items.filter { !$0.excluded }.reduce(0) { $0 + $1.amount }
+    }
+
     var body: some View {
-        Section(title) {
-            ForEach(items) { item in
-                Button { onTap(item) } label: {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(item.title)
-                                .foregroundStyle(item.excluded ? .secondary : .primary)
-                                .strikethrough(item.excluded)
-                            Text(item.category)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                        Spacer()
-                        VStack(alignment: .trailing, spacing: 2) {
-                            Text(item.amount.eurFormatted)
-                                .foregroundStyle(item.type == .income ? .green : .primary)
-                                .strikethrough(item.excluded)
-                            if item.isSplit {
-                                Text("geteilt")
-                                    .font(.caption2)
-                                    .foregroundStyle(.secondary)
+        if !items.isEmpty {
+            VStack(alignment: .leading, spacing: 0) {
+                HStack {
+                    Text(title)
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                        .textCase(.uppercase)
+                    Spacer()
+                    Text(subtotal.eurFormatted)
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                }
+                .padding(.horizontal)
+                .padding(.top, 16)
+                .padding(.bottom, 8)
+
+                VStack(spacing: 0) {
+                    ForEach(items) { item in
+                        Button { onTap(item) } label: {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(item.title)
+                                        .font(.body)
+                                        .foregroundStyle(item.excluded ? .secondary : .primary)
+                                        .strikethrough(item.excluded)
+                                    Text(item.category)
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                                VStack(alignment: .trailing, spacing: 2) {
+                                    Text(item.amount.eurFormatted)
+                                        .font(.body)
+                                        .foregroundStyle(item.excluded ? .secondary : .primary)
+                                        .strikethrough(item.excluded)
+                                    if item.isSplit {
+                                        Text("geteilt")
+                                            .font(.caption2)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                }
                             }
+                            .padding(.horizontal)
+                            .padding(.vertical, 10)
                         }
+                        .buttonStyle(.plain)
                     }
                 }
-                .swipeActions(edge: .trailing) {
-                    Button {
-                        onToggleExcluded(item)
-                    } label: {
-                        Label(
-                            item.excluded ? "Einblenden" : "Ausblenden",
-                            systemImage: item.excluded ? "eye" : "eye.slash"
-                        )
-                    }
-                    .tint(.orange)
+                .background {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(.regularMaterial)
                 }
+                .padding(.horizontal)
             }
         }
     }

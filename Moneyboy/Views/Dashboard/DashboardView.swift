@@ -1,32 +1,33 @@
 import SwiftUI
 
 struct DashboardView: View {
-    @EnvironmentObject private var authService: AuthService
     @EnvironmentObject private var appViewModel: AppViewModel
+    @Binding var selectedTab: AppTab
     @State private var showingAddSheet = false
     @State private var editingItem: FinanceItem?
 
+    private var fixkostenTotal: Double {
+        let wk = appViewModel.wohnkostenItems.filter { !$0.excluded }.reduce(0) { $0 + $1.amount }
+        let fk = appViewModel.fixedExpenseItems.filter { !$0.excluded }.reduce(0) { $0 + $1.amount }
+        return wk + fk
+    }
+
+    private var wohnkostenTotal: Double {
+        appViewModel.wohnkostenItems
+            .filter { !$0.excluded }
+            .reduce(0) { $0 + $1.amount }
+    }
+
     var body: some View {
         NavigationStack {
-            List {
-                // Hero balance card
-                Section {
+            ScrollView {
+                VStack(spacing: 16) {
                     BalanceHeroCard(summary: appViewModel.summary)
-                        .listRowInsets(EdgeInsets())
-                        .listRowBackground(Color.clear)
-                }
 
-                // Subscription alerts
-                if !appViewModel.upcomingSubscriptions.isEmpty {
-                    Section {
+                    if !appViewModel.upcomingSubscriptions.isEmpty {
                         SubscriptionAlertBanner(items: appViewModel.upcomingSubscriptions)
-                            .listRowInsets(EdgeInsets())
-                            .listRowBackground(Color.clear)
                     }
-                }
 
-                // Summary tiles
-                Section {
                     HStack(spacing: 12) {
                         SummaryTile(
                             title: "Einnahmen",
@@ -41,41 +42,28 @@ struct DashboardView: View {
                             color: .red
                         )
                     }
-                    .listRowInsets(EdgeInsets())
-                    .listRowBackground(Color.clear)
                 }
+                .padding(.horizontal)
+                .padding(.bottom, 8)
 
-                // Income
-                TransactionListSection(
-                    title: "Einnahmen",
-                    items: appViewModel.incomeItems,
-                    onTap: { editingItem = $0 },
-                    onToggleExcluded: { item in
-                        Task { try? await appViewModel.toggleExcluded(uid: authService.user!.uid, item: item) }
-                    }
-                )
+                LazyVStack(spacing: 0) {
+                    TransactionListSection(
+                        title: "Einnahmen",
+                        items: appViewModel.incomeItems,
+                        onTap: { editingItem = $0 },
+                        onToggleExcluded: { appViewModel.toggleExcluded($0) }
+                    )
 
-                // Fixed expenses
-                TransactionListSection(
-                    title: "Fixkosten",
-                    items: appViewModel.fixedExpenseItems,
-                    onTap: { editingItem = $0 },
-                    onToggleExcluded: { item in
-                        Task { try? await appViewModel.toggleExcluded(uid: authService.user!.uid, item: item) }
-                    }
-                )
+                    fixkostenSection
 
-                // Variable expenses
-                TransactionListSection(
-                    title: "Variable Ausgaben",
-                    items: appViewModel.flexibleExpenseItems,
-                    onTap: { editingItem = $0 },
-                    onToggleExcluded: { item in
-                        Task { try? await appViewModel.toggleExcluded(uid: authService.user!.uid, item: item) }
-                    }
-                )
+                    TransactionListSection(
+                        title: "Variable Ausgaben",
+                        items: appViewModel.flexibleExpenseItems,
+                        onTap: { editingItem = $0 },
+                        onToggleExcluded: { appViewModel.toggleExcluded($0) }
+                    )
+                }
             }
-            .listStyle(.insetGrouped)
             .navigationTitle("Übersicht")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -93,6 +81,88 @@ struct DashboardView: View {
                 ItemFormSheet(existingItem: item)
                     .presentationDetents([.large])
                     .presentationDragIndicator(.visible)
+            }
+        }
+    }
+
+    private var fixkostenSection: some View {
+        let hasWohnkosten = !appViewModel.wohnkostenItems.isEmpty
+        let hasFixkosten = !appViewModel.fixedExpenseItems.isEmpty
+
+        return Group {
+            if hasWohnkosten || hasFixkosten {
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack {
+                        Text("Fixkosten")
+                            .font(.footnote.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                            .textCase(.uppercase)
+                        Spacer()
+                        Text(fixkostenTotal.eurFormatted)
+                            .font(.footnote.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 16)
+                    .padding(.bottom, 8)
+
+                    VStack(spacing: 0) {
+                        // Wohnkosten summary row
+                        if hasWohnkosten {
+                            Button { selectedTab = .wohnen } label: {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text("Wohnkosten")
+                                            .font(.body)
+                                        Text("\(appViewModel.wohnkostenItems.count) Posten")
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                    Spacer()
+                                    HStack(spacing: 4) {
+                                        Text(wohnkostenTotal.eurFormatted)
+                                            .font(.body)
+                                        Image(systemName: "chevron.right")
+                                            .font(.caption2)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                }
+                                .padding(.horizontal)
+                                .padding(.vertical, 10)
+                            }
+                            .buttonStyle(.plain)
+                        }
+
+                        // Regular fixed expenses
+                        ForEach(appViewModel.fixedExpenseItems) { item in
+                            Button { editingItem = item } label: {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(item.title)
+                                            .font(.body)
+                                            .foregroundStyle(item.excluded ? .secondary : .primary)
+                                            .strikethrough(item.excluded)
+                                        Text(item.category)
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                    Spacer()
+                                    Text(item.amount.eurFormatted)
+                                        .font(.body)
+                                        .strikethrough(item.excluded)
+                                }
+                                .padding(.horizontal)
+                                .padding(.vertical, 10)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .background {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(.regularMaterial)
+                    }
+                    .padding(.horizontal)
+                }
             }
         }
     }

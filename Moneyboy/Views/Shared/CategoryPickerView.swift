@@ -17,48 +17,55 @@ struct CategoryPickerView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(filtered, id: \.self) { cat in
-                    Button {
-                        selected = cat
-                        dismiss()
-                    } label: {
-                        HStack {
-                            Text(cat)
-                                .foregroundStyle(.primary)
-                            Spacer()
-                            if cat == selected {
-                                Image(systemName: "checkmark")
-                                    .foregroundStyle(.accentColor)
-                            }
+            categoryList
+                .searchable(text: $searchText, prompt: "Kategorie suchen")
+                .navigationTitle("Kategorie")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Abbrechen") { dismiss() }
+                    }
+                }
+                .alert("Neue Kategorie", isPresented: $showingNewCategory) {
+                    TextField("Name", text: $newCategoryName)
+                    Button("Hinzufügen") {
+                        let trimmed = newCategoryName.trimmingCharacters(in: .whitespaces)
+                        if !trimmed.isEmpty {
+                            selected = trimmed
+                            dismiss()
                         }
                     }
+                    Button("Abbrechen", role: .cancel) {}
                 }
+        }
+    }
 
-                Button {
-                    showingNewCategory = true
-                } label: {
-                    Label("Neue Kategorie anlegen", systemImage: "plus.circle")
-                }
+    private var categoryList: some View {
+        List {
+            ForEach(Array(filtered), id: \.self) { (cat: String) in
+                categoryRow(cat)
             }
-            .searchable(text: $searchText, prompt: "Kategorie suchen")
-            .navigationTitle("Kategorie")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Abbrechen") { dismiss() }
-                }
+            Button {
+                showingNewCategory = true
+            } label: {
+                Label("Neue Kategorie anlegen", systemImage: "plus.circle")
             }
-            .alert("Neue Kategorie", isPresented: $showingNewCategory) {
-                TextField("Name", text: $newCategoryName)
-                Button("Hinzufügen") {
-                    let trimmed = newCategoryName.trimmingCharacters(in: .whitespaces)
-                    if !trimmed.isEmpty {
-                        selected = trimmed
-                        dismiss()
-                    }
+        }
+    }
+
+    private func categoryRow(_ cat: String) -> some View {
+        Button {
+            selected = cat
+            dismiss()
+        } label: {
+            HStack {
+                Text(cat)
+                    .foregroundStyle(.primary)
+                Spacer()
+                if cat == selected {
+                    Image(systemName: "checkmark")
+                        .foregroundStyle(.primary)
                 }
-                Button("Abbrechen", role: .cancel) {}
             }
         }
     }

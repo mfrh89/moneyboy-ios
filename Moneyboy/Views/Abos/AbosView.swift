@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct AbosView: View {
-    @EnvironmentObject private var authService: AuthService
     @EnvironmentObject private var appViewModel: AppViewModel
     @State private var editingItem: FinanceItem?
 
@@ -17,7 +16,6 @@ struct AbosView: View {
     var body: some View {
         NavigationStack {
             List {
-                // Total
                 Section {
                     VStack(spacing: 4) {
                         Text("Monatliche Kosten")
@@ -46,14 +44,14 @@ struct AbosView: View {
                                                 .font(.caption)
                                                 .padding(.horizontal, 6)
                                                 .padding(.vertical, 2)
-                                                .background(Color.accentColor.opacity(0.15), in: Capsule())
-                                                .foregroundStyle(.accentColor)
+                                                .background(Color.secondary.opacity(0.2), in: Capsule())
+                                                .foregroundStyle(.primary)
                                         }
                                         if let nb = item.subscriptionNextBilling {
                                             let days = nb.daysFromNow
                                             Text(days <= 2 ? "in \(days)d ⚠️" : nb.deShort)
                                                 .font(.caption)
-                                                .foregroundStyle(days <= 2 ? .orange : .secondary)
+                                                .foregroundStyle(.secondary)
                                         }
                                     }
                                 }
@@ -64,7 +62,7 @@ struct AbosView: View {
                         }
                         .swipeActions(edge: .trailing) {
                             Button {
-                                Task { try? await appViewModel.toggleExcluded(uid: authService.user!.uid, item: item) }
+                                appViewModel.toggleExcluded(item)
                             } label: {
                                 Label(item.excluded ? "Einblenden" : "Ausblenden",
                                       systemImage: item.excluded ? "eye" : "eye.slash")
@@ -75,6 +73,7 @@ struct AbosView: View {
                 }
             }
             .listStyle(.insetGrouped)
+            .tint(.primary)
             .navigationTitle("Abonnements")
             .sheet(item: $editingItem) { item in
                 ItemFormSheet(existingItem: item)

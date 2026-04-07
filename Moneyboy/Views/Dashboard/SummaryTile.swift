@@ -7,23 +7,24 @@ struct SummaryTile: View {
     let color: Color
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 4) {
                 Image(systemName: systemImage)
+                    .font(.caption)
                     .foregroundStyle(color)
                 Text(title)
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
             Text(amount.eurCompact)
-                .font(.headline)
+                .font(.subheadline.bold())
                 .minimumScaleFactor(0.7)
                 .lineLimit(1)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(16)
+        .padding(12)
         .background {
-            RoundedRectangle(cornerRadius: 16)
+            RoundedRectangle(cornerRadius: 12)
                 .fill(.regularMaterial)
         }
     }

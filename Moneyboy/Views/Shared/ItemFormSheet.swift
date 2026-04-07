@@ -1,29 +1,26 @@
 import SwiftUI
 
 struct ItemFormSheet: View {
-    @EnvironmentObject private var authService: AuthService
     @EnvironmentObject private var appViewModel: AppViewModel
     @Environment(\.dismiss) private var dismiss
 
     /// Pass an existing item to edit; nil = create new
     var existingItem: FinanceItem?
+    /// Pre-set isWohnkosten when adding from WohnenView
+    var presetWohnkosten: Bool = false
 
     @State private var title = ""
     @State private var amountText = ""
     @State private var type: FinanceItem.TransactionType = .expense
-    @State private var category = "Sonstiges"
+    @State private var category = "Wohnen"
     @State private var isFlexible = false
     @State private var isSplit = false
     @State private var isWohnkosten = false
     @State private var isSubscription = false
     @State private var subscriptionCycle: FinanceItem.SubscriptionCycle = .monthly
     @State private var nextBilling = Date()
-    @State private var cancellationDeadline = Date()
-    @State private var showNextBilling = false
-    @State private var showCancellationDeadline = false
     @State private var showCategoryPicker = false
     @State private var showDeleteConfirm = false
-    @State private var isSaving = false
 
     private var isEditing: Bool { existingItem != nil }
 
@@ -32,7 +29,6 @@ struct ItemFormSheet: View {
     var body: some View {
         NavigationStack {
             Form {
-                // Type
                 Section("Typ") {
                     Picker("Typ", selection: $type) {
                         Text("Einnahme").tag(FinanceItem.TransactionType.income)
@@ -41,7 +37,6 @@ struct ItemFormSheet: View {
                     .pickerStyle(.segmented)
                 }
 
-                // Details
                 Section("Details") {
                     TextField("Bezeichnung", text: $title)
                     HStack {
@@ -66,7 +61,6 @@ struct ItemFormSheet: View {
                     }
                 }
 
-                // Options
                 Section("Optionen") {
                     if type == .expense {
                         Toggle("Variable Ausgabe", isOn: $isFlexible)
@@ -84,25 +78,20 @@ struct ItemFormSheet: View {
                     Toggle("Abonnement", isOn: $isSubscription.animation())
                 }
 
-                // Subscription details
                 if isSubscription {
-                    Section("Abo-Details") {
+                    Section {
                         Picker("Zyklus", selection: $subscriptionCycle) {
                             Text("Monatlich").tag(FinanceItem.SubscriptionCycle.monthly)
                             Text("Jährlich").tag(FinanceItem.SubscriptionCycle.yearly)
                         }
-                        Toggle("Nächste Abrechnung", isOn: $showNextBilling.animation())
-                        if showNextBilling {
-                            DatePicker("Datum", selection: $nextBilling, displayedComponents: .date)
-                        }
-                        Toggle("Kündigungsfrist", isOn: $showCancellationDeadline.animation())
-                        if showCancellationDeadline {
-                            DatePicker("Datum", selection: $cancellationDeadline, displayedComponents: .date)
-                        }
+                        DatePicker("Nächste Abrechnung", selection: $nextBilling, displayedComponents: .date)
+                    } header: {
+                        Text("Abo-Details")
+                    } footer: {
+                        Text("Du wirst 1 Tag vor der nächsten Abrechnung per Notification erinnert.")
                     }
                 }
 
-                // Delete (edit mode only)
                 if isEditing {
                     Section {
                         Button("Eintrag löschen", role: .destructive) {
@@ -118,15 +107,15 @@ struct ItemFormSheet: View {
                     Button("Abbrechen") { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Speichern") { Task { await save() } }
-                        .disabled(title.isEmpty || amount <= 0 || isSaving)
+                    Button("Speichern") { save() }
+                        .disabled(title.isEmpty || amount <= 0)
                 }
             }
             .sheet(isPresented: $showCategoryPicker) {
                 CategoryPickerView(selected: $category)
             }
             .confirmationDialog("Eintrag löschen?", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
-                Button("Löschen", role: .destructive) { Task { await delete() } }
+                Button("Löschen", role: .destructive) { delete() }
                 Button("Abbrechen", role: .cancel) {}
             } message: {
                 Text("Diese Aktion kann nicht rückgängig gemacht werden.")
@@ -136,6 +125,11 @@ struct ItemFormSheet: View {
     }
 
     private func populate() {
+        if presetWohnkosten && existingItem == nil {
+            isWohnkosten = true
+            category = "Wohnen"
+            return
+        }
         guard let item = existingItem else { return }
         title = item.title
         amountText = item.isSplit ? String(item.amount * 2) : String(item.amount)
@@ -146,46 +140,46 @@ struct ItemFormSheet: View {
         isWohnkosten = item.isWohnkosten
         isSubscription = item.isSubscription
         if let cycle = item.subscriptionCycle { subscriptionCycle = cycle }
-        if let nb = item.subscriptionNextBilling { nextBilling = nb; showNextBilling = true }
-        if let cd = item.subscriptionCancellationDeadline { cancellationDeadline = cd; showCancellationDeadline = true }
+        if let nb = item.subscriptionNextBilling { nextBilling = nb }
     }
 
-    private func save() async {
-        guard let uid = authService.user?.uid else { return }
-        isSaving = true
+    private func save() {
         let storedAmount = isSplit ? amount / 2 : amount
-        let item = FinanceItem(
-            id: existingItem?.id ?? UUID().uuidString,
-            title: title,
-            amount: storedAmount,
-            type: type,
-            category: category,
-            isFlexible: isFlexible,
-            isSplit: isSplit,
-            isWohnkosten: isWohnkosten,
-            excluded: existingItem?.excluded ?? false,
-            isSubscription: isSubscription,
-            subscriptionNextBilling: showNextBilling ? nextBilling : nil,
-            subscriptionCancellationDeadline: showCancellationDeadline ? cancellationDeadline : nil,
-            subscriptionCycle: isSubscription ? subscriptionCycle : nil,
-            createdAt: existingItem?.createdAt ?? Date()
-        )
-        do {
-            if isEditing {
-                try await appViewModel.updateItem(uid: uid, item: item)
-            } else {
-                try await appViewModel.addItem(uid: uid, item: item)
-            }
-            dismiss()
-        } catch {
-            // Show error (omitted for brevity)
+
+        if let existing = existingItem {
+            existing.title = title
+            existing.amount = storedAmount
+            existing.type = type
+            existing.category = category
+            existing.isFlexible = isFlexible
+            existing.isSplit = isSplit
+            existing.isWohnkosten = isWohnkosten
+            existing.isSubscription = isSubscription
+            existing.subscriptionNextBilling = isSubscription ? nextBilling : nil
+            existing.subscriptionCancellationDeadline = nil
+            existing.subscriptionCycle = isSubscription ? subscriptionCycle : nil
+            appViewModel.updateItem(existing)
+        } else {
+            let item = FinanceItem(
+                title: title,
+                amount: storedAmount,
+                type: type,
+                category: category,
+                isFlexible: isFlexible,
+                isSplit: isSplit,
+                isWohnkosten: isWohnkosten,
+                isSubscription: isSubscription,
+                subscriptionNextBilling: isSubscription ? nextBilling : nil,
+                subscriptionCycle: isSubscription ? subscriptionCycle : nil
+            )
+            appViewModel.addItem(item)
         }
-        isSaving = false
+        dismiss()
     }
 
-    private func delete() async {
-        guard let uid = authService.user?.uid, let item = existingItem else { return }
-        try? await appViewModel.deleteItem(uid: uid, itemId: item.id)
+    private func delete() {
+        guard let item = existingItem else { return }
+        appViewModel.deleteItem(item)
         dismiss()
     }
 }

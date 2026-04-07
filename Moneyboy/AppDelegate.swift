@@ -1,29 +1,19 @@
 import UIKit
-import FirebaseMessaging
 import UserNotifications
 
-class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate, @unchecked Sendable {
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
-        UNUserNotificationCenter.current().delegate = self
-        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
         return true
     }
+}
 
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Messaging.messaging().apnsToken = deviceToken
-    }
-
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        NotificationCenter.default.post(
-            name: Notification.Name("FCMToken"),
-            object: nil,
-            userInfo: ["token": fcmToken ?? ""]
-        )
-    }
+final class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate, Sendable {
+    static let shared = NotificationDelegate()
 
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,

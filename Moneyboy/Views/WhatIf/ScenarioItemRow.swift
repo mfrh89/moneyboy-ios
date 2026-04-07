@@ -30,7 +30,7 @@ struct ScenarioItemRow: View {
             Spacer()
 
             if editingAmount {
-                HStack(spacing: 8) {
+                HStack(spacing: 6) {
                     TextField("Betrag", text: $amountText)
                         .keyboardType(.decimalPad)
                         .focused($focused)
@@ -47,40 +47,52 @@ struct ScenarioItemRow: View {
                         }
                         editingAmount = false
                     } label: {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(.green)
+                        Image(systemName: "checkmark")
+                            .font(.caption.bold())
+                            .foregroundStyle(.white)
+                            .frame(width: 28, height: 28)
+                            .background(Color.green.opacity(0.8), in: RoundedRectangle(cornerRadius: 8))
                     }
-                    .frame(width: 44, height: 44)
+                    .buttonStyle(.plain)
 
                     Button {
                         editingAmount = false
                     } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundStyle(.secondary)
+                        Image(systemName: "xmark")
+                            .font(.caption.bold())
+                            .foregroundStyle(.white)
+                            .frame(width: 28, height: 28)
+                            .background(Color.secondary.opacity(0.4), in: RoundedRectangle(cornerRadius: 8))
                     }
-                    .frame(width: 44, height: 44)
+                    .buttonStyle(.plain)
                 }
             } else {
-                HStack(spacing: 12) {
+                HStack(spacing: 6) {
                     Text(displayAmount.eurFormatted)
-                        .foregroundStyle(override != nil ? .orange : (isExcluded ? .secondary : .primary))
+                        .foregroundStyle(isExcluded ? .secondary : .primary)
                         .strikethrough(isExcluded)
 
                     Button {
                         editingAmount = true
                     } label: {
-                        Image(systemName: "pencil.circle")
-                            .foregroundStyle(.secondary)
+                        Image(systemName: "pencil")
+                            .font(.caption)
+                            .foregroundStyle(.primary)
+                            .frame(width: 28, height: 28)
+                            .background(Color.secondary.opacity(0.2), in: RoundedRectangle(cornerRadius: 8))
                     }
-                    .frame(width: 44, height: 44)
+                    .buttonStyle(.plain)
 
                     Button {
                         onExclude()
                     } label: {
                         Image(systemName: isExcluded ? "eye" : "eye.slash")
-                            .foregroundStyle(isExcluded ? .green : .secondary)
+                            .font(.caption)
+                            .foregroundStyle(.primary)
+                            .frame(width: 28, height: 28)
+                            .background(Color.secondary.opacity(0.2), in: RoundedRectangle(cornerRadius: 8))
                     }
-                    .frame(width: 44, height: 44)
+                    .buttonStyle(.plain)
                 }
             }
         }

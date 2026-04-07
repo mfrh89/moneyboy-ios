@@ -1,0 +1,31 @@
+name: Moneyboy
+options:
+  bundleIdPrefix: com.moneyboy
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "26.3"
+  generateEmptyDirectories: true
+
+targets:
+  Moneyboy:
+    type: application
+    platform: iOS
+    sources:
+      - path: Moneyboy
+    info:
+      path: Moneyboy/Info.plist
+      properties:
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.moneyboy.app
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "6.0"
+        DEVELOPMENT_TEAM: 8UW4GXUZ76
+        CODE_SIGN_STYLE: Automatic
+        INFOPLIST_FILE: Moneyboy/Info.plist

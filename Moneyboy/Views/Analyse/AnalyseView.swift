@@ -5,7 +5,7 @@ struct AnalyseView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
+            Group {
                 if appViewModel.items.isEmpty {
                     ContentUnavailableView(
                         "Keine Daten",
@@ -13,8 +13,11 @@ struct AnalyseView: View {
                         description: Text("Füge Einnahmen und Ausgaben hinzu, um die Analyse zu sehen.")
                     )
                 } else {
-                    FlowChartView(items: appViewModel.items)
-                        .padding()
+                    ScrollView {
+                        FlowChartView(items: appViewModel.items)
+                            .frame(height: 500)
+                            .padding(.horizontal, 4)
+                    }
                 }
             }
             .navigationTitle("Analyse")

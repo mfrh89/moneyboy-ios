@@ -1,48 +1,41 @@
 import SwiftUI
 
 struct WhatIfView: View {
-    @EnvironmentObject private var authService: AuthService
     @EnvironmentObject private var appViewModel: AppViewModel
     @StateObject private var viewModel = WhatIfViewModel()
     @State private var showingAddSheet = false
 
-    private var uid: String { authService.user?.uid ?? "" }
-
     var body: some View {
         NavigationStack {
             List {
-                // Comparison card
                 comparisonSection
 
-                // Income
                 Section("Einnahmen") {
                     ForEach(appViewModel.incomeItems) { item in
                         ScenarioItemRow(
                             item: item,
                             isExcluded: viewModel.excludedIDs.contains(item.id),
                             override: viewModel.overrides[item.id],
-                            onExclude: { viewModel.toggleExcluded(id: item.id); viewModel.save(uid: uid) },
-                            onOverride: { viewModel.setOverride(id: item.id, amount: $0); viewModel.save(uid: uid) },
-                            onClearOverride: { viewModel.clearOverride(id: item.id); viewModel.save(uid: uid) }
+                            onExclude: { viewModel.toggleExcluded(id: item.id); viewModel.save() },
+                            onOverride: { viewModel.setOverride(id: item.id, amount: $0); viewModel.save() },
+                            onClearOverride: { viewModel.clearOverride(id: item.id); viewModel.save() }
                         )
                     }
                 }
 
-                // Expenses
                 Section("Ausgaben") {
                     ForEach(appViewModel.items.filter { $0.type == .expense }) { item in
                         ScenarioItemRow(
                             item: item,
                             isExcluded: viewModel.excludedIDs.contains(item.id),
                             override: viewModel.overrides[item.id],
-                            onExclude: { viewModel.toggleExcluded(id: item.id); viewModel.save(uid: uid) },
-                            onOverride: { viewModel.setOverride(id: item.id, amount: $0); viewModel.save(uid: uid) },
-                            onClearOverride: { viewModel.clearOverride(id: item.id); viewModel.save(uid: uid) }
+                            onExclude: { viewModel.toggleExcluded(id: item.id); viewModel.save() },
+                            onOverride: { viewModel.setOverride(id: item.id, amount: $0); viewModel.save() },
+                            onClearOverride: { viewModel.clearOverride(id: item.id); viewModel.save() }
                         )
                     }
                 }
 
-                // Hypothetical additions
                 if !viewModel.additions.isEmpty {
                     Section("Hypothetische Einträge") {
                         ForEach(viewModel.additions) { item in
@@ -55,14 +48,12 @@ struct WhatIfView: View {
                                 }
                                 Spacer()
                                 Text((item.type == .expense ? "-" : "+") + item.amount.eurFormatted)
-                                    .foregroundStyle(item.type == .income ? .green : .red)
                             }
                         }
-                        .onDelete { viewModel.removeAddition(at: $0); viewModel.save(uid: uid) }
+                        .onDelete { viewModel.removeAddition(at: $0); viewModel.save() }
                     }
                 }
 
-                // Add hypothetical entry
                 Section {
                     Button {
                         showingAddSheet = true
@@ -77,16 +68,16 @@ struct WhatIfView: View {
                 if viewModel.hasChanges {
                     ToolbarItem(placement: .destructiveAction) {
                         Button("Zurücksetzen", role: .destructive) {
-                            viewModel.reset(uid: uid)
+                            viewModel.reset()
                         }
                     }
                 }
             }
-            .task { await viewModel.load(uid: uid) }
+            .onAppear { viewModel.load() }
             .sheet(isPresented: $showingAddSheet) {
                 AddHypotheticalSheet { item in
                     viewModel.addScenarioItem(item)
-                    viewModel.save(uid: uid)
+                    viewModel.save()
                 }
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
@@ -102,32 +93,36 @@ struct WhatIfView: View {
                 Text("Szenario-Vergleich")
                     .font(.headline)
                 HStack {
-                    comparisonColumn(label: "Aktuell", summary: base, color: .primary)
+                    comparisonColumn(label: "Aktuell", summary: base)
                     Divider()
-                    comparisonColumn(label: "Szenario", summary: scenario, color: .orange)
+                    comparisonColumn(label: "Szenario", summary: scenario)
                 }
                 let diff = scenario.balance - base.balance
                 HStack {
-                    Text("Differenz")
-                        .foregroundStyle(.secondary)
                     Spacer()
-                    Text((diff >= 0 ? "+" : "") + diff.eurFormatted)
-                        .foregroundStyle(diff >= 0 ? .green : .red)
-                        .bold()
+                    VStack(spacing: 2) {
+                        Text("Differenz")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text((diff >= 0 ? "+" : "") + diff.eurFormatted)
+                            .font(.headline)
+                            .bold()
+                            .foregroundStyle(diff >= 0 ? .green : .red)
+                    }
+                    Spacer()
                 }
             }
             .padding(.vertical, 8)
         }
     }
 
-    private func comparisonColumn(label: String, summary: FinanceSummary, color: Color) -> some View {
+    private func comparisonColumn(label: String, summary: FinanceSummary) -> some View {
         VStack(spacing: 6) {
             Text(label)
                 .font(.caption)
                 .foregroundStyle(.secondary)
             Text(summary.balance.eurFormatted)
                 .font(.headline)
-                .foregroundStyle(color)
             Text("↑ \(summary.totalIncome.eurCompact)")
                 .font(.caption)
                 .foregroundStyle(.green)
@@ -142,7 +137,7 @@ struct WhatIfView: View {
 // MARK: - Add Hypothetical Sheet
 
 private struct AddHypotheticalSheet: View {
-    let onAdd: (FinanceItem) -> Void
+    let onAdd: (ScenarioAddition) -> Void
     @Environment(\.dismiss) private var dismiss
 
     @State private var title = ""
@@ -177,7 +172,7 @@ private struct AddHypotheticalSheet: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Hinzufügen") {
                         let amount = Double(amountText.replacingOccurrences(of: ",", with: ".")) ?? 0
-                        let item = FinanceItem(title: title, amount: amount, type: type, category: category)
+                        let item = ScenarioAddition(title: title, amount: amount, type: type, category: category)
                         onAdd(item)
                         dismiss()
                     }

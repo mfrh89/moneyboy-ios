@@ -1,10 +1,12 @@
 import Foundation
+import SwiftData
 
-struct FinanceItem: Identifiable, Codable, Hashable {
+@Model
+final class FinanceItem: Identifiable {
     var id: String
     var title: String
     var amount: Double
-    var type: TransactionType
+    var typeRaw: String
     var category: String
     var isFlexible: Bool
     var isSplit: Bool
@@ -13,7 +15,7 @@ struct FinanceItem: Identifiable, Codable, Hashable {
     var isSubscription: Bool
     var subscriptionNextBilling: Date?
     var subscriptionCancellationDeadline: Date?
-    var subscriptionCycle: SubscriptionCycle?
+    var subscriptionCycleRaw: String?
     var createdAt: Date
 
     enum TransactionType: String, Codable {
@@ -26,11 +28,14 @@ struct FinanceItem: Identifiable, Codable, Hashable {
         case yearly
     }
 
-    enum CodingKeys: String, CodingKey {
-        case id, title, amount, type, category
-        case isFlexible, isSplit, isWohnkosten, excluded
-        case isSubscription, subscriptionNextBilling, subscriptionCancellationDeadline, subscriptionCycle
-        case createdAt
+    var type: TransactionType {
+        get { TransactionType(rawValue: typeRaw) ?? .expense }
+        set { typeRaw = newValue.rawValue }
+    }
+
+    var subscriptionCycle: SubscriptionCycle? {
+        get { subscriptionCycleRaw.flatMap { SubscriptionCycle(rawValue: $0) } }
+        set { subscriptionCycleRaw = newValue?.rawValue }
     }
 
     init(
@@ -52,7 +57,7 @@ struct FinanceItem: Identifiable, Codable, Hashable {
         self.id = id
         self.title = title
         self.amount = amount
-        self.type = type
+        self.typeRaw = type.rawValue
         self.category = category
         self.isFlexible = isFlexible
         self.isSplit = isSplit
@@ -61,7 +66,7 @@ struct FinanceItem: Identifiable, Codable, Hashable {
         self.isSubscription = isSubscription
         self.subscriptionNextBilling = subscriptionNextBilling
         self.subscriptionCancellationDeadline = subscriptionCancellationDeadline
-        self.subscriptionCycle = subscriptionCycle
+        self.subscriptionCycleRaw = subscriptionCycle?.rawValue
         self.createdAt = createdAt
     }
 }

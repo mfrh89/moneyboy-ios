@@ -4,41 +4,40 @@ struct BalanceHeroCard: View {
     let summary: FinanceSummary
 
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 8) {
             Text("Verfügbar")
-                .font(.callout)
+                .font(.caption)
                 .foregroundStyle(.secondary)
 
             Text(summary.balance.eurFormatted)
-                .font(.system(size: 44, weight: .bold, design: .rounded))
-                .foregroundStyle(summary.balance >= 0 ? Color.primary : Color.red)
+                .font(.system(size: 32, weight: .bold, design: .rounded))
                 .minimumScaleFactor(0.6)
                 .lineLimit(1)
 
-            HStack(spacing: 24) {
+            HStack(spacing: 20) {
                 VStack(spacing: 2) {
                     Text("Einnahmen")
-                        .font(.caption)
+                        .font(.caption2)
                         .foregroundStyle(.secondary)
                     Text(summary.totalIncome.eurCompact)
-                        .font(.subheadline.bold())
+                        .font(.footnote.bold())
                         .foregroundStyle(.green)
                 }
-                Divider().frame(height: 28)
+                Divider().frame(height: 20)
                 VStack(spacing: 2) {
                     Text("Ausgaben")
-                        .font(.caption)
+                        .font(.caption2)
                         .foregroundStyle(.secondary)
                     Text(summary.totalExpenses.eurCompact)
-                        .font(.subheadline.bold())
+                        .font(.footnote.bold())
                         .foregroundStyle(.red)
                 }
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(24)
+        .padding(16)
         .background {
-            RoundedRectangle(cornerRadius: 24)
+            RoundedRectangle(cornerRadius: 16)
                 .fill(.regularMaterial)
         }
     }
