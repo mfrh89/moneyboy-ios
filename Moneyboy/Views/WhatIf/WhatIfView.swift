@@ -24,7 +24,7 @@ struct WhatIfView: View {
                 }
 
                 Section("Ausgaben") {
-                    ForEach(appViewModel.items.filter { $0.type == .expense }) { item in
+                    ForEach(appViewModel.items.filter { $0.type == .expense }.sorted { $0.amount > $1.amount }) { item in
                         ScenarioItemRow(
                             item: item,
                             isExcluded: viewModel.excludedIDs.contains(item.id),
