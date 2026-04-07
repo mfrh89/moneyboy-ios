@@ -26,10 +26,11 @@ struct WohnenView: View {
             List {
                 Section {
                     VStack(spacing: 6) {
-                        Text("MONATLICHE WOHNKOSTEN")
+                        Text("Monatliche Wohnkosten")
                             .font(.caption2.weight(.medium))
                             .tracking(0.5)
                             .foregroundStyle(.secondary)
+                            .textCase(.uppercase)
 
                         if appViewModel.wohnkostenItems.isEmpty {
                             Text("—")

@@ -6,7 +6,7 @@ struct SettingsView: View {
     @State private var newCategoryName = ""
     @State private var renamingCategory: String?
     @State private var renameText = ""
-    @State private var notificationsEnabled = false
+    @AppStorage("notificationsEnabled") private var notificationsEnabled = false
     @State private var deletingCategory: String?
 
     var body: some View {
@@ -18,6 +18,7 @@ struct SettingsView: View {
                     } label: {
                         Label("Szenario-Planer", systemImage: "lightbulb")
                     }
+
                 }
 
                 Section {

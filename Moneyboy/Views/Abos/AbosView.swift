@@ -17,12 +17,14 @@ struct AbosView: View {
         NavigationStack {
             List {
                 Section {
-                    VStack(spacing: 4) {
+                    VStack(spacing: 6) {
                         Text("Monatliche Kosten")
-                            .font(.callout)
+                            .font(.caption2.weight(.medium))
+                            .tracking(0.5)
                             .foregroundStyle(.secondary)
+                            .textCase(.uppercase)
                         Text(monthlyTotal.eurFormatted)
-                            .font(.system(size: 36, weight: .bold, design: .rounded))
+                            .font(.system(size: 32, weight: .bold, design: .rounded))
                     }
                     .frame(maxWidth: .infinity)
                     .padding(16)

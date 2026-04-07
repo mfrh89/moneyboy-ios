@@ -15,20 +15,27 @@ struct TransactionListSection: View {
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     Text(title)
-                        .font(.footnote.weight(.semibold))
+                        .font(.body)
                         .foregroundStyle(.secondary)
-                        .textCase(.uppercase)
                     Spacer()
-                    Text(subtotal.eurFormatted)
-                        .font(.footnote.weight(.semibold))
-                        .foregroundStyle(.secondary)
+                    HStack(spacing: 3) {
+                        Image(systemName: "sum")
+                            .font(.system(size: 9))
+                        Text(subtotal.eurFormatted)
+                            .font(.body)
+                    }
+                    .foregroundStyle(.secondary)
                 }
                 .padding(.horizontal)
                 .padding(.top, 16)
                 .padding(.bottom, 8)
 
                 VStack(spacing: 0) {
-                    ForEach(items) { item in
+                    ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                        if index > 0 {
+                            Divider()
+                                .padding(.horizontal)
+                        }
                         Button { onTap(item) } label: {
                             HStack {
                                 VStack(alignment: .leading, spacing: 2) {
