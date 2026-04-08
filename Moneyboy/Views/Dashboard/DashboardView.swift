@@ -31,29 +31,13 @@ struct DashboardView: View {
             List {
                 // MARK: - Hero Section
                 Section {
+                    BalanceHeroCard(summary: appViewModel.summary)
+                } header: {
                     if !appViewModel.upcomingSubscriptions.isEmpty {
                         SubscriptionAlertBanner(items: appViewModel.upcomingSubscriptions)
-                            .listRowInsets(EdgeInsets(top: 20, leading: 20, bottom: 3, trailing: 20))
+                            .textCase(nil)
+                            .padding(.bottom, 4)
                     }
-
-                    BalanceHeroCard(summary: appViewModel.summary)
-                        .listRowInsets(EdgeInsets(top: appViewModel.upcomingSubscriptions.isEmpty ? 20 : 3, leading: 20, bottom: 3, trailing: 20))
-
-                    HStack(spacing: 6) {
-                        SummaryTile(
-                            title: "Einnahmen",
-                            amount: appViewModel.summary.totalIncome,
-                            systemImage: "arrow.down.circle.fill",
-                            color: .green
-                        )
-                        SummaryTile(
-                            title: "Ausgaben",
-                            amount: appViewModel.summary.totalExpenses,
-                            systemImage: "arrow.up.circle.fill",
-                            color: .red
-                        )
-                    }
-                    .listRowInsets(EdgeInsets(top: 3, leading: 20, bottom: 20, trailing: 20))
                 }
                 .listRowSeparator(.hidden)
 
@@ -78,6 +62,7 @@ struct DashboardView: View {
                     } header: {
                         sectionHeader("Einnahmen", subtotal: incomeSubtotal)
                     }
+                    .listSectionSpacing(24)
                 }
 
                 // MARK: - Fixkosten

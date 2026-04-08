@@ -4,41 +4,63 @@ struct BalanceHeroCard: View {
     let summary: FinanceSummary
 
     var body: some View {
-        VStack(spacing: 8) {
-            Text("Verfügbar")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+        VStack(spacing: 16) {
+            VStack(spacing: 8) {
+                Text("Verfügbar")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
 
-            Text(summary.balance.eurFormatted)
-                .font(.system(size: 32, weight: .bold, design: .rounded))
-                .minimumScaleFactor(0.6)
-                .lineLimit(1)
+                Text(summary.balance.eurFormatted)
+                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                    .minimumScaleFactor(0.6)
+                    .lineLimit(1)
+            }
 
-            HStack(spacing: 20) {
-                VStack(spacing: 2) {
-                    Text("Einnahmen")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
+            HStack(spacing: 8) {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "arrow.down.circle.fill")
+                            .font(.caption)
+                            .foregroundStyle(.green)
+                        Text("Einnahmen")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                     Text(summary.totalIncome.eurCompact)
-                        .font(.footnote.bold())
-                        .foregroundStyle(.green)
+                        .font(.subheadline.bold())
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
                 }
-                Divider().frame(height: 20)
-                VStack(spacing: 2) {
-                    Text("Ausgaben")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(12)
+                .background {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.green.opacity(0.1))
+                }
+
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "arrow.up.circle.fill")
+                            .font(.caption)
+                            .foregroundStyle(.red)
+                        Text("Ausgaben")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                     Text(summary.totalExpenses.eurCompact)
-                        .font(.footnote.bold())
-                        .foregroundStyle(.red)
+                        .font(.subheadline.bold())
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(12)
+                .background {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.red.opacity(0.1))
                 }
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(16)
-        .background {
-            RoundedRectangle(cornerRadius: 16)
-                .fill(.regularMaterial)
-        }
+        .padding(.vertical, 8)
     }
 }

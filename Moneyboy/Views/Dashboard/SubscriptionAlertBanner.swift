@@ -4,10 +4,11 @@ struct SubscriptionAlertBanner: View {
     let items: [FinanceItem]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 10) {
             Label("Abo-Erinnerungen", systemImage: "bell.badge.fill")
-                .font(.caption.bold())
-                .foregroundStyle(.primary)
+                .font(.subheadline.bold())
+                .labelStyle(.titleAndIcon)
+
 
             ForEach(items) { item in
                 HStack {
@@ -17,11 +18,13 @@ struct SubscriptionAlertBanner: View {
                     if let date = item.subscriptionNextBilling {
                         Text(date.deShort)
                             .font(.caption2)
-                            .foregroundStyle(.secondary)
+                            .opacity(0.7)
                     }
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .foregroundColor(.white)
         .padding(12)
         .background {
             RoundedRectangle(cornerRadius: 12)

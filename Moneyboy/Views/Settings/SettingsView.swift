@@ -84,6 +84,11 @@ struct SettingsView: View {
                 Section("Daten") {
                     LabeledContent("Einträge", value: "\(appViewModel.items.count)")
                 }
+
+                Section("About") {
+                    LabeledContent("Version", value: "\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "–") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "–"))")
+                    LabeledContent("Git", value: "\(BuildInfo.gitBranch) @ \(BuildInfo.gitCommitHash)")
+                }
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Einstellungen")
