@@ -65,6 +65,15 @@ struct DashboardView: View {
                                 financeItemRow(item)
                             }
                             .buttonStyle(.plain)
+                            .swipeActions(edge: .trailing) {
+                                Button {
+                                    appViewModel.toggleExcluded(item)
+                                } label: {
+                                    Label(item.excluded ? "Einblenden" : "Ausblenden",
+                                          systemImage: item.excluded ? "eye" : "eye.slash")
+                                }
+                                .tint(.orange)
+                            }
                         }
                     } header: {
                         sectionHeader("Einnahmen", subtotal: incomeSubtotal)
@@ -100,6 +109,15 @@ struct DashboardView: View {
                                 financeItemRow(item)
                             }
                             .buttonStyle(.plain)
+                            .swipeActions(edge: .trailing) {
+                                Button {
+                                    appViewModel.toggleExcluded(item)
+                                } label: {
+                                    Label(item.excluded ? "Einblenden" : "Ausblenden",
+                                          systemImage: item.excluded ? "eye" : "eye.slash")
+                                }
+                                .tint(.orange)
+                            }
                         }
                     } header: {
                         sectionHeader("Fixkosten", subtotal: fixkostenTotal)
@@ -114,6 +132,15 @@ struct DashboardView: View {
                                 financeItemRow(item)
                             }
                             .buttonStyle(.plain)
+                            .swipeActions(edge: .trailing) {
+                                Button {
+                                    appViewModel.toggleExcluded(item)
+                                } label: {
+                                    Label(item.excluded ? "Einblenden" : "Ausblenden",
+                                          systemImage: item.excluded ? "eye" : "eye.slash")
+                                }
+                                .tint(.orange)
+                            }
                         }
                     } header: {
                         sectionHeader("Variable Ausgaben", subtotal: flexSubtotal)
