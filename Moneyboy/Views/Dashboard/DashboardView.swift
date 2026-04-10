@@ -53,14 +53,14 @@ struct DashboardView: View {
                                 Button {
                                     appViewModel.toggleExcluded(item)
                                 } label: {
-                                    Label(item.excluded ? "Einblenden" : "Ausblenden",
+                                    Label(item.excluded ? "Show" : "Hide",
                                           systemImage: item.excluded ? "eye" : "eye.slash")
                                 }
                                 .tint(.orange)
                             }
                         }
                     } header: {
-                        sectionHeader("Einnahmen", subtotal: incomeSubtotal)
+                        sectionHeader("Income", subtotal: incomeSubtotal)
                     }
                     .listSectionSpacing(24)
                 }
@@ -72,8 +72,8 @@ struct DashboardView: View {
                             Button { selectedTab = .wohnen } label: {
                                 HStack {
                                     VStack(alignment: .leading, spacing: 2) {
-                                        Text("Wohnkosten")
-                                        Text("\(appViewModel.wohnkostenItems.count) Posten")
+                                        Text("Housing Costs")
+                                        Text("\(appViewModel.wohnkostenItems.count) items")
                                             .font(.caption)
                                             .foregroundStyle(.secondary)
                                     }
@@ -98,14 +98,14 @@ struct DashboardView: View {
                                 Button {
                                     appViewModel.toggleExcluded(item)
                                 } label: {
-                                    Label(item.excluded ? "Einblenden" : "Ausblenden",
+                                    Label(item.excluded ? "Show" : "Hide",
                                           systemImage: item.excluded ? "eye" : "eye.slash")
                                 }
                                 .tint(.orange)
                             }
                         }
                     } header: {
-                        sectionHeader("Fixkosten", subtotal: fixkostenTotal)
+                        sectionHeader("Fixed Costs", subtotal: fixkostenTotal)
                     }
                 }
 
@@ -121,19 +121,19 @@ struct DashboardView: View {
                                 Button {
                                     appViewModel.toggleExcluded(item)
                                 } label: {
-                                    Label(item.excluded ? "Einblenden" : "Ausblenden",
+                                    Label(item.excluded ? "Show" : "Hide",
                                           systemImage: item.excluded ? "eye" : "eye.slash")
                                 }
                                 .tint(.orange)
                             }
                         }
                     } header: {
-                        sectionHeader("Variable Ausgaben", subtotal: flexSubtotal)
+                        sectionHeader("Variable Expenses", subtotal: flexSubtotal)
                     }
                 }
             }
             .listStyle(.insetGrouped)
-            .navigationTitle("Übersicht")
+            .navigationTitle("Overview")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button { showingAddSheet = true } label: {
@@ -184,7 +184,7 @@ struct DashboardView: View {
                     .foregroundStyle(item.excluded ? .secondary : .primary)
                     .strikethrough(item.excluded)
                 if item.isSplit {
-                    Text("geteilt")
+                    Text("split")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                 }

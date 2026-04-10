@@ -12,7 +12,7 @@ struct ItemFormSheet: View {
     @State private var title = ""
     @State private var amountText = ""
     @State private var type: FinanceItem.TransactionType = .expense
-    @State private var category = "Wohnen"
+    @State private var category = "Housing"
     @State private var isFlexible = false
     @State private var isSplit = false
     @State private var isWohnkosten = false
@@ -29,18 +29,18 @@ struct ItemFormSheet: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Typ") {
-                    Picker("Typ", selection: $type) {
-                        Text("Einnahme").tag(FinanceItem.TransactionType.income)
-                        Text("Ausgabe").tag(FinanceItem.TransactionType.expense)
+                Section("Type") {
+                    Picker("Type", selection: $type) {
+                        Text("Income").tag(FinanceItem.TransactionType.income)
+                        Text("Expense").tag(FinanceItem.TransactionType.expense)
                     }
                     .pickerStyle(.segmented)
                 }
 
                 Section("Details") {
-                    TextField("Bezeichnung", text: $title)
+                    TextField("Title", text: $title)
                     HStack {
-                        TextField("Betrag", text: $amountText)
+                        TextField("Amount", text: $amountText)
                             .keyboardType(.decimalPad)
                         Text("€")
                             .foregroundStyle(.secondary)
@@ -49,7 +49,7 @@ struct ItemFormSheet: View {
                         showCategoryPicker = true
                     } label: {
                         HStack {
-                            Text("Kategorie")
+                            Text("Category")
                                 .foregroundStyle(.primary)
                             Spacer()
                             Text(category)
@@ -61,64 +61,64 @@ struct ItemFormSheet: View {
                     }
                 }
 
-                Section("Optionen") {
+                Section("Options") {
                     if type == .expense {
-                        Toggle("Variable Ausgabe", isOn: $isFlexible)
-                        Toggle("Wohnkosten", isOn: $isWohnkosten)
-                        Toggle("Geteilt (÷2)", isOn: $isSplit)
+                        Toggle("Variable Expense", isOn: $isFlexible)
+                        Toggle("Housing Cost", isOn: $isWohnkosten)
+                        Toggle("Split (÷2)", isOn: $isSplit)
                         if isSplit {
                             HStack {
-                                Text("Dein Anteil")
+                                Text("Your Share")
                                 Spacer()
                                 Text((amount / 2).eurFormatted)
                                     .foregroundStyle(.secondary)
                             }
                         }
                     }
-                    Toggle("Abonnement", isOn: $isSubscription.animation())
+                    Toggle("Subscription", isOn: $isSubscription.animation())
                 }
 
                 if isSubscription {
                     Section {
-                        Picker("Zyklus", selection: $subscriptionCycle) {
-                            Text("Monatlich").tag(FinanceItem.SubscriptionCycle.monthly)
-                            Text("Jährlich").tag(FinanceItem.SubscriptionCycle.yearly)
+                        Picker("Cycle", selection: $subscriptionCycle) {
+                            Text("Monthly").tag(FinanceItem.SubscriptionCycle.monthly)
+                            Text("Yearly").tag(FinanceItem.SubscriptionCycle.yearly)
                         }
-                        DatePicker("Nächste Abrechnung", selection: $nextBilling, displayedComponents: .date)
+                        DatePicker("Next Billing", selection: $nextBilling, displayedComponents: .date)
                     } header: {
-                        Text("Abo-Details")
+                        Text("Subscription Details")
                     } footer: {
-                        Text("Du wirst 1 Tag vor der nächsten Abrechnung per Notification erinnert.")
+                        Text("You'll be notified 1 day before the next billing date.")
                     }
                 }
 
                 if isEditing {
                     Section {
-                        Button("Eintrag löschen", role: .destructive) {
+                        Button("Delete Entry", role: .destructive) {
                             showDeleteConfirm = true
                         }
                     }
                 }
             }
-            .navigationTitle(isEditing ? "Bearbeiten" : "Neuer Eintrag")
+            .navigationTitle(isEditing ? "Edit" : "New Entry")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Abbrechen") { dismiss() }
+                    Button("Cancel") { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Speichern") { save() }
+                    Button("Save") { save() }
                         .disabled(title.isEmpty || amount <= 0)
                 }
             }
             .sheet(isPresented: $showCategoryPicker) {
                 CategoryPickerView(selected: $category)
             }
-            .confirmationDialog("Eintrag löschen?", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
-                Button("Löschen", role: .destructive) { delete() }
-                Button("Abbrechen", role: .cancel) {}
+            .confirmationDialog("Delete Entry?", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
+                Button("Delete", role: .destructive) { delete() }
+                Button("Cancel", role: .cancel) {}
             } message: {
-                Text("Diese Aktion kann nicht rückgängig gemacht werden.")
+                Text("This action cannot be undone.")
             }
         }
         .onAppear { populate() }
@@ -127,7 +127,7 @@ struct ItemFormSheet: View {
     private func populate() {
         if presetWohnkosten && existingItem == nil {
             isWohnkosten = true
-            category = "Wohnen"
+            category = "Housing"
             return
         }
         guard let item = existingItem else { return }

@@ -11,19 +11,19 @@ struct RootView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            Tab("Übersicht", systemImage: "chart.bar.fill", value: AppTab.dashboard) {
+            Tab("Overview", systemImage: "chart.bar.fill", value: AppTab.dashboard) {
                 DashboardView(selectedTab: $selectedTab)
             }
-            Tab("Wohnen", systemImage: "house.fill", value: AppTab.wohnen) {
+            Tab("Housing", systemImage: "house.fill", value: AppTab.wohnen) {
                 WohnenView()
             }
-            Tab("Abos", systemImage: "repeat", value: AppTab.abos) {
+            Tab("Subscriptions", systemImage: "repeat", value: AppTab.abos) {
                 AbosView()
             }
-            Tab("Analyse", systemImage: "chart.pie.fill", value: AppTab.analyse) {
+            Tab("Analysis", systemImage: "chart.pie.fill", value: AppTab.analyse) {
                 AnalyseView()
             }
-            Tab("Einstellungen", systemImage: "gearshape.fill", value: AppTab.settings) {
+            Tab("Settings", systemImage: "gearshape.fill", value: AppTab.settings) {
                 SettingsView()
             }
         }

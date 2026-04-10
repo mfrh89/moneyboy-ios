@@ -18,24 +18,24 @@ struct CategoryPickerView: View {
     var body: some View {
         NavigationStack {
             categoryList
-                .searchable(text: $searchText, prompt: "Kategorie suchen")
-                .navigationTitle("Kategorie")
+                .searchable(text: $searchText, prompt: "Search category")
+                .navigationTitle("Category")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Abbrechen") { dismiss() }
+                        Button("Cancel") { dismiss() }
                     }
                 }
-                .alert("Neue Kategorie", isPresented: $showingNewCategory) {
+                .alert("New Category", isPresented: $showingNewCategory) {
                     TextField("Name", text: $newCategoryName)
-                    Button("Hinzufügen") {
+                    Button("Add") {
                         let trimmed = newCategoryName.trimmingCharacters(in: .whitespaces)
                         if !trimmed.isEmpty {
                             selected = trimmed
                             dismiss()
                         }
                     }
-                    Button("Abbrechen", role: .cancel) {}
+                    Button("Cancel", role: .cancel) {}
                 }
         }
     }
@@ -48,7 +48,7 @@ struct CategoryPickerView: View {
             Button {
                 showingNewCategory = true
             } label: {
-                Label("Neue Kategorie anlegen", systemImage: "plus.circle")
+                Label("Create New Category", systemImage: "plus.circle")
             }
         }
     }

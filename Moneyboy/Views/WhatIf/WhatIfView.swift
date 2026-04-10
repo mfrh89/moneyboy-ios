@@ -10,7 +10,7 @@ struct WhatIfView: View {
             List {
                 comparisonSection
 
-                Section("Einnahmen") {
+                Section("Income") {
                     ForEach(appViewModel.incomeItems) { item in
                         ScenarioItemRow(
                             item: item,
@@ -23,7 +23,7 @@ struct WhatIfView: View {
                     }
                 }
 
-                Section("Ausgaben") {
+                Section("Expenses") {
                     ForEach(appViewModel.items.filter { $0.type == .expense }.sorted { $0.amount > $1.amount }) { item in
                         ScenarioItemRow(
                             item: item,
@@ -37,7 +37,7 @@ struct WhatIfView: View {
                 }
 
                 if !viewModel.additions.isEmpty {
-                    Section("Hypothetische Einträge") {
+                    Section("Hypothetical Entries") {
                         ForEach(viewModel.additions) { item in
                             HStack {
                                 VStack(alignment: .leading, spacing: 2) {
@@ -58,16 +58,16 @@ struct WhatIfView: View {
                     Button {
                         showingAddSheet = true
                     } label: {
-                        Label("Hypothetischen Eintrag hinzufügen", systemImage: "plus.circle")
+                        Label("Add Hypothetical Entry", systemImage: "plus.circle")
                     }
                 }
             }
             .listStyle(.insetGrouped)
-            .navigationTitle("Was wäre wenn?")
+            .navigationTitle("What If?")
             .toolbar {
                 if viewModel.hasChanges {
                     ToolbarItem(placement: .destructiveAction) {
-                        Button("Zurücksetzen", role: .destructive) {
+                        Button("Reset", role: .destructive) {
                             viewModel.reset()
                         }
                     }
@@ -90,18 +90,18 @@ struct WhatIfView: View {
             let base = appViewModel.summary
             let scenario = viewModel.scenarioSummary(base: appViewModel.items)
             VStack(spacing: 12) {
-                Text("Szenario-Vergleich")
+                Text("Scenario Comparison")
                     .font(.headline)
                 HStack {
-                    comparisonColumn(label: "Aktuell", summary: base)
+                    comparisonColumn(label: "Current", summary: base)
                     Divider()
-                    comparisonColumn(label: "Szenario", summary: scenario)
+                    comparisonColumn(label: "Scenario", summary: scenario)
                 }
                 let diff = scenario.balance - base.balance
                 HStack {
                     Spacer()
                     VStack(spacing: 2) {
-                        Text("Differenz")
+                        Text("Difference")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         Text((diff >= 0 ? "+" : "") + diff.eurFormatted)
@@ -143,34 +143,34 @@ private struct AddHypotheticalSheet: View {
     @State private var title = ""
     @State private var amountText = ""
     @State private var type: FinanceItem.TransactionType = .expense
-    @State private var category = "Sonstiges"
+    @State private var category = "Other"
 
     var body: some View {
         NavigationStack {
             Form {
-                Section("Typ") {
-                    Picker("Typ", selection: $type) {
-                        Text("Einnahme").tag(FinanceItem.TransactionType.income)
-                        Text("Ausgabe").tag(FinanceItem.TransactionType.expense)
+                Section("Type") {
+                    Picker("Type", selection: $type) {
+                        Text("Income").tag(FinanceItem.TransactionType.income)
+                        Text("Expense").tag(FinanceItem.TransactionType.expense)
                     }
                     .pickerStyle(.segmented)
                 }
                 Section("Details") {
-                    TextField("Bezeichnung", text: $title)
+                    TextField("Title", text: $title)
                     HStack {
-                        TextField("Betrag", text: $amountText)
+                        TextField("Amount", text: $amountText)
                             .keyboardType(.decimalPad)
                         Text("€").foregroundStyle(.secondary)
                     }
-                    TextField("Kategorie", text: $category)
+                    TextField("Category", text: $category)
                 }
             }
-            .navigationTitle("Hypothetischer Eintrag")
+            .navigationTitle("Hypothetical Entry")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) { Button("Abbrechen") { dismiss() } }
+                ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Hinzufügen") {
+                    Button("Add") {
                         let amount = Double(amountText.replacingOccurrences(of: ",", with: ".")) ?? 0
                         let item = ScenarioAddition(title: title, amount: amount, type: type, category: category)
                         onAdd(item)

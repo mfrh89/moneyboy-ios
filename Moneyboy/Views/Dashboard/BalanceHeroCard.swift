@@ -6,7 +6,7 @@ struct BalanceHeroCard: View {
     var body: some View {
         VStack(spacing: 16) {
             VStack(spacing: 8) {
-                Text("Verfügbar")
+                Text("Available")
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
@@ -22,7 +22,7 @@ struct BalanceHeroCard: View {
                         Image(systemName: "arrow.down.circle.fill")
                             .font(.caption)
                             .foregroundStyle(.green)
-                        Text("Einnahmen")
+                        Text("Income")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -43,7 +43,7 @@ struct BalanceHeroCard: View {
                         Image(systemName: "arrow.up.circle.fill")
                             .font(.caption)
                             .foregroundStyle(.red)
-                        Text("Ausgaben")
+                        Text("Expenses")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }

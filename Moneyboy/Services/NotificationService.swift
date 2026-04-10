@@ -17,7 +17,7 @@ final class NotificationService {
         center.removeAllPendingNotificationRequests()
 
         for item in items where item.isSubscription {
-            scheduleDateAlert(for: item, date: item.subscriptionNextBilling, type: "Abrechnung", prefix: "💳")
+            scheduleDateAlert(for: item, date: item.subscriptionNextBilling, type: "Billing", prefix: "💳")
         }
     }
 
@@ -28,7 +28,7 @@ final class NotificationService {
 
         let content = UNMutableNotificationContent()
         content.title = "\(prefix) \(item.title)"
-        content.body = "\(type) morgen: \(date.deShort) – \(item.amount.eurFormatted)"
+        content.body = "\(type) tomorrow: \(date.deShort) – \(item.amount.eurFormatted)"
         content.sound = .default
 
         var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: alertDate)

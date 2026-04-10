@@ -54,7 +54,7 @@ struct TransactionListSection: View {
                                         .foregroundStyle(item.excluded ? .secondary : .primary)
                                         .strikethrough(item.excluded)
                                     if item.isSplit {
-                                        Text("geteilt")
+                                        Text("split")
                                             .font(.caption2)
                                             .foregroundStyle(.secondary)
                                     }
