@@ -26,7 +26,7 @@ struct WohnenView: View {
             List {
                 Section {
                     VStack(spacing: 6) {
-                        Text("Monatliche Wohnkosten")
+                        Text("Monthly Housing Costs")
                             .font(.caption2.weight(.medium))
                             .tracking(0.5)
                             .foregroundStyle(.secondary)
@@ -36,14 +36,14 @@ struct WohnenView: View {
                             Text("—")
                                 .font(.system(size: 32, weight: .bold, design: .rounded))
                                 .foregroundStyle(.secondary)
-                            Text("Füge unten Kosten hinzu")
+                            Text("Add costs below")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         } else {
                             Text(total.eurFormatted)
                                 .font(.system(size: 32, weight: .bold, design: .rounded))
                             if hasSplitItems {
-                                Text("Gesamt: \(combinedTotal.eurFormatted)")
+                                Text("Total: \(combinedTotal.eurFormatted)")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
@@ -55,9 +55,9 @@ struct WohnenView: View {
                     .listRowBackground(Color.clear)
                 }
 
-                Section("Wohnkosten") {
+                Section("Housing Costs") {
                     if appViewModel.wohnkostenItems.isEmpty {
-                        Text("Noch keine Wohnkosten erfasst.")
+                        Text("No housing costs added yet.")
                             .foregroundStyle(.secondary)
                             .font(.callout)
                     } else {
@@ -77,7 +77,7 @@ struct WohnenView: View {
                                         Text(item.amount.eurFormatted)
                                             .strikethrough(item.excluded)
                                         if item.isSplit {
-                                            Text("½ von \((item.amount * 2).eurFormatted)")
+                                            Text("½ of \((item.amount * 2).eurFormatted)")
                                                 .font(.caption2)
                                                 .foregroundStyle(.secondary)
                                         }
@@ -88,7 +88,7 @@ struct WohnenView: View {
                                 Button {
                                     appViewModel.toggleExcluded(item)
                                 } label: {
-                                    Label(item.excluded ? "Einblenden" : "Ausblenden",
+                                    Label(item.excluded ? "Show" : "Hide",
                                           systemImage: item.excluded ? "eye" : "eye.slash")
                                 }
                                 .tint(.orange)
@@ -99,7 +99,7 @@ struct WohnenView: View {
             }
             .listStyle(.insetGrouped)
             .tint(.primary)
-            .navigationTitle("Wohnen")
+            .navigationTitle("Housing")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button { showingAddSheet = true } label: {

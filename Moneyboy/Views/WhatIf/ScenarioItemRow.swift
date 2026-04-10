@@ -31,7 +31,7 @@ struct ScenarioItemRow: View {
 
             if editingAmount {
                 HStack(spacing: 6) {
-                    TextField("Betrag", text: $amountText)
+                    TextField("Amount", text: $amountText)
                         .keyboardType(.decimalPad)
                         .focused($focused)
                         .frame(width: 80)
@@ -98,7 +98,7 @@ struct ScenarioItemRow: View {
         }
         .swipeActions(edge: .leading) {
             if override != nil {
-                Button("Zurücksetzen", role: .destructive) {
+                Button("Reset", role: .destructive) {
                     onClearOverride()
                 }
                 .tint(.orange)

@@ -57,9 +57,9 @@ class AppViewModel: ObservableObject {
     }
 
     private let defaultCategories = [
-        "Gehalt", "Nebeneinkommen", "Wohnen", "Lebensmittel", "Lebenshaltung",
-        "Transport", "Versicherungen", "Abonnements", "Gesundheit",
-        "Freizeit", "Kleidung", "Bildung", "Sonstiges"
+        "Salary", "Side Income", "Housing", "Groceries", "Living Expenses",
+        "Transport", "Insurance", "Subscriptions", "Health",
+        "Leisure", "Clothing", "Education", "Other"
     ]
 
     var availableCategories: [String] {

@@ -12,11 +12,11 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("Was wäre wenn") {
+                Section("What If") {
                     NavigationLink {
                         WhatIfView()
                     } label: {
-                        Label("Szenario-Planer", systemImage: "lightbulb")
+                        Label("Scenario Planner", systemImage: "lightbulb")
                     }
 
                 }
@@ -56,7 +56,7 @@ struct SettingsView: View {
                     .padding(.vertical, 4)
                 } header: {
                     HStack {
-                        Text("Kategorien")
+                        Text("Categories")
                         Spacer()
                         Button { showingAddCategory = true } label: {
                             Image(systemName: "plus")
@@ -65,8 +65,8 @@ struct SettingsView: View {
                     }
                 }
 
-                Section("Benachrichtigungen") {
-                    Toggle("Abo-Erinnerungen", isOn: $notificationsEnabled)
+                Section("Notifications") {
+                    Toggle("Subscription Reminders", isOn: $notificationsEnabled)
                         .onChange(of: notificationsEnabled) { _, enabled in
                             if enabled {
                                 Task {
@@ -81,8 +81,17 @@ struct SettingsView: View {
                         }
                 }
 
-                Section("Daten") {
-                    LabeledContent("Einträge", value: "\(appViewModel.items.count)")
+                Section("Data") {
+                    LabeledContent("Entries", value: "\(appViewModel.items.count)")
+                }
+
+                Section("Legal") {
+                    Link(destination: URL(string: "https://mfrh.xyz/apps/moneyboy")!) {
+                        Label("Privacy Policy", systemImage: "hand.raised")
+                    }
+                    Link(destination: URL(string: "mailto:support@mfrh.xyz")!) {
+                        Label("Contact Support", systemImage: "envelope")
+                    }
                 }
 
                 Section("About") {
@@ -91,41 +100,41 @@ struct SettingsView: View {
                 }
             }
             .listStyle(.insetGrouped)
-            .navigationTitle("Einstellungen")
-            .alert("Neue Kategorie", isPresented: $showingAddCategory) {
+            .navigationTitle("Settings")
+            .alert("New Category", isPresented: $showingAddCategory) {
                 TextField("Name", text: $newCategoryName)
-                Button("Hinzufügen") {
+                Button("Add") {
                     appViewModel.addCategory(newCategoryName)
                     newCategoryName = ""
                 }
-                Button("Abbrechen", role: .cancel) { newCategoryName = "" }
+                Button("Cancel", role: .cancel) { newCategoryName = "" }
             }
-            .alert("Umbenennen", isPresented: Binding(
+            .alert("Rename", isPresented: Binding(
                 get: { renamingCategory != nil },
                 set: { if !$0 { renamingCategory = nil } }
             )) {
-                TextField("Neuer Name", text: $renameText)
-                Button("Speichern") {
+                TextField("New Name", text: $renameText)
+                Button("Save") {
                     if let old = renamingCategory {
                         appViewModel.renameCategory(from: old, to: renameText)
                     }
                     renamingCategory = nil
                 }
-                Button("Abbrechen", role: .cancel) { renamingCategory = nil }
+                Button("Cancel", role: .cancel) { renamingCategory = nil }
             }
-            .alert("Kategorie löschen?", isPresented: Binding(
+            .alert("Delete Category?", isPresented: Binding(
                 get: { deletingCategory != nil },
                 set: { if !$0 { deletingCategory = nil } }
             )) {
-                Button("Löschen", role: .destructive) {
+                Button("Delete", role: .destructive) {
                     if let cat = deletingCategory {
                         appViewModel.deleteCategory(cat)
                     }
                     deletingCategory = nil
                 }
-                Button("Abbrechen", role: .cancel) { deletingCategory = nil }
+                Button("Cancel", role: .cancel) { deletingCategory = nil }
             } message: {
-                Text("\"\(deletingCategory ?? "")\" wird aus der Liste entfernt.")
+                Text("\"\(deletingCategory ?? "")\" will be removed from the list.")
             }
         }
     }

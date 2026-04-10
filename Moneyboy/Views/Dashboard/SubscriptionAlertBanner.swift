@@ -5,7 +5,7 @@ struct SubscriptionAlertBanner: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label("Abo-Erinnerungen", systemImage: "bell.badge.fill")
+            Label("Subscription Reminders", systemImage: "bell.badge.fill")
                 .font(.subheadline.bold())
                 .labelStyle(.titleAndIcon)
 

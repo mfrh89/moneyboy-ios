@@ -147,7 +147,7 @@ struct FlowChartView: View {
         // Balance
         if balance > 0 {
             let h = CGFloat(balance / max(totalIncome, 1)) * usableH
-            var node = SankeyNode(id: "available", label: "Verfügbar", value: balance, color: .green, column: 2)
+            var node = SankeyNode(id: "available", label: "Available", value: balance, color: .green, column: 2)
             node.x = col3X; node.y = expenseY; node.height = max(h, 4)
             nodes[node.id] = node
             links.append(SankeyLink(sourceID: "budget", targetID: "available", value: balance, color: .green))

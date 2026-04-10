@@ -18,7 +18,7 @@ struct AbosView: View {
             List {
                 Section {
                     VStack(spacing: 6) {
-                        Text("Monatliche Kosten")
+                        Text("Monthly Costs")
                             .font(.caption2.weight(.medium))
                             .tracking(0.5)
                             .foregroundStyle(.secondary)
@@ -32,7 +32,7 @@ struct AbosView: View {
                     .listRowBackground(Color.clear)
                 }
 
-                Section("Abonnements") {
+                Section("Subscriptions") {
                     ForEach(appViewModel.aboItems) { item in
                         Button { editingItem = item } label: {
                             HStack {
@@ -42,7 +42,7 @@ struct AbosView: View {
                                         .strikethrough(item.excluded)
                                     HStack(spacing: 6) {
                                         if let cycle = item.subscriptionCycle {
-                                            Text(cycle == .monthly ? "monatlich" : "jährlich")
+                                            Text(cycle == .monthly ? "monthly" : "yearly")
                                                 .font(.caption)
                                                 .padding(.horizontal, 6)
                                                 .padding(.vertical, 2)
@@ -66,7 +66,7 @@ struct AbosView: View {
                             Button {
                                 appViewModel.toggleExcluded(item)
                             } label: {
-                                Label(item.excluded ? "Einblenden" : "Ausblenden",
+                                Label(item.excluded ? "Show" : "Hide",
                                       systemImage: item.excluded ? "eye" : "eye.slash")
                             }
                             .tint(.orange)
@@ -76,7 +76,7 @@ struct AbosView: View {
             }
             .listStyle(.insetGrouped)
             .tint(.primary)
-            .navigationTitle("Abonnements")
+            .navigationTitle("Subscriptions")
             .sheet(item: $editingItem) { item in
                 ItemFormSheet(existingItem: item)
                     .presentationDetents([.large])

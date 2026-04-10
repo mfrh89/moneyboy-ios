@@ -8,9 +8,9 @@ struct AnalyseView: View {
             Group {
                 if appViewModel.items.isEmpty {
                     ContentUnavailableView(
-                        "Keine Daten",
+                        "No Data",
                         systemImage: "chart.pie",
-                        description: Text("Füge Einnahmen und Ausgaben hinzu, um die Analyse zu sehen.")
+                        description: Text("Add income and expenses to see the analysis.")
                     )
                 } else {
                     ScrollView {
@@ -20,7 +20,7 @@ struct AnalyseView: View {
                     }
                 }
             }
-            .navigationTitle("Analyse")
+            .navigationTitle("Analysis")
         }
     }
 }
