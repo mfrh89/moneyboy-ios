@@ -4,6 +4,7 @@
 *.xcodeproj/project.xcworkspace/xcshareddata/
 DerivedData/
 .build/
+build/
 *.ipa
 *.dSYM.zip
 *.dSYM
