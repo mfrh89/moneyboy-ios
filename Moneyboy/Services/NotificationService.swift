@@ -17,7 +17,7 @@ final class NotificationService {
         center.removeAllPendingNotificationRequests()
 
         for item in items where item.isSubscription {
-            scheduleDateAlert(for: item, date: item.subscriptionNextBilling, type: "Billing", prefix: "💳")
+            scheduleDateAlert(for: item, date: item.effectiveNextBilling, type: "Billing", prefix: "💳")
         }
     }
 

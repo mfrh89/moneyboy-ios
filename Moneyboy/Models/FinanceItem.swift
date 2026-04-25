@@ -38,6 +38,28 @@ final class FinanceItem: Identifiable {
         set { subscriptionCycleRaw = newValue?.rawValue }
     }
 
+    /// Next billing occurrence ≥ today, computed from the stored anchor and cycle.
+    /// The anchor stays stable; this rolls forward by month/year as time passes.
+    var effectiveNextBilling: Date? {
+        guard let anchor = subscriptionNextBilling else { return nil }
+        let cal = Calendar.current
+        let today = cal.startOfDay(for: .now)
+        if anchor >= today { return anchor }
+        let component: Calendar.Component
+        switch subscriptionCycle {
+        case .monthly: component = .month
+        case .yearly:  component = .year
+        case .none:    return anchor
+        }
+        let elapsed = cal.dateComponents([component], from: anchor, to: today).value(for: component) ?? 0
+        var next = cal.date(byAdding: component, value: max(0, elapsed), to: anchor) ?? anchor
+        while next < today {
+            guard let advanced = cal.date(byAdding: component, value: 1, to: next) else { break }
+            next = advanced
+        }
+        return next
+    }
+
     init(
         id: String = UUID().uuidString,
         title: String,

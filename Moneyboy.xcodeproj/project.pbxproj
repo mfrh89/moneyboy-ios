@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		07DE80D6E11A5A35EF230D7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D51921CDB28E9E1EF94FD29 /* AppDelegate.swift */; };
+		090D450291481E2F0CCAD844 /* ScenarioDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC27B173891084D06D059C8 /* ScenarioDataTests.swift */; };
 		0B3ECDFC70AD840B46A1D894 /* ScenarioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADEBB43D2C803F3B02F3D9 /* ScenarioService.swift */; };
 		0DBF5977FEFEE86271B48AB2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7ECB5A4185307F120DF207 /* NotificationService.swift */; };
 		179C74009AE6B73DDF3432B4 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762F596B28FE659483752CA8 /* FlowLayout.swift */; };
+		236746B528D4F958522A5A2B /* FinanceSummaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AD05D769571409A5DE08BF /* FinanceSummaryTests.swift */; };
 		25546BCC900656C4902B6208 /* Date+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4075DEE24243AB47B5CCD6 /* Date+Formatting.swift */; };
 		2E8B3D6B614D670FD83C60F3 /* SubscriptionAlertBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FF498AFC56EEFD6FF5644 /* SubscriptionAlertBanner.swift */; };
 		301D768791D9FFA6412F3556 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E23422318B2C930FFCB02 /* RootView.swift */; };
@@ -29,6 +31,7 @@
 		7D3BC571745AF23CEFF57E38 /* SummaryTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79E68A8AE17F50C4C2F71FE /* SummaryTile.swift */; };
 		A2A77FD3A43E2B7C70947E16 /* FinanceSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF63380E0DC6C69E29062CFA /* FinanceSummary.swift */; };
 		A44927F543100D588C25934D /* AnalyseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87319649EA0B3442618B8416 /* AnalyseView.swift */; };
+		AAACB0F2634E2F8A2244C0BB /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1A0ED18B9E76A1CA7C4B1CFC /* PrivacyInfo.xcprivacy */; };
 		B0C6D6D880F17A794BBBCC8E /* AbosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AB36EE49639C7909F047A /* AbosView.swift */; };
 		BB1903C75A00BEAAC5F09E50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88447C944ACD3CD9B245546C /* Assets.xcassets */; };
 		C68A6ACF68FE9277CCAE2DC2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57A55C368C6A48DB71B09C /* SettingsView.swift */; };
@@ -37,23 +40,41 @@
 		E3E9E6106D8E3D1A720F67A2 /* WhatIfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F458B27BD55DF6A362896E07 /* WhatIfViewModel.swift */; };
 		E464F383D143B5955669E25E /* ScenarioItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6E3FE69E3E15049A7B38E9 /* ScenarioItemRow.swift */; };
 		F2346415AB5ED87C533AFE9C /* WhatIfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BC7DE012314096D2965E0C /* WhatIfView.swift */; };
+		F481721CD5F4FDDCFD1DC57F /* SubscriptionBillingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0968B8F46F6DBBEAAAD446 /* SubscriptionBillingTests.swift */; };
+		F65CC697EA44F5B1D42A6354 /* BuildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205F6E20574978DDF5C53D37 /* BuildInfo.swift */; };
 		F98325F4900D416C0E774A7D /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676BA8EDD8C5EA0FE38609D1 /* DashboardView.swift */; };
-		BLDINFO0001000000000001 /* BuildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BLDINFO0002000000000001 /* BuildInfo.swift */; };
+		FD12769B3B10F4DE6D98A20C /* WhatIfViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8221AED12642FF9DB5D5E15 /* WhatIfViewModelTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FEC6C85B4CAE929EDA8A31C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 914875688FC5C068867A8C83 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F8E07CDF3D35F4F88E392EA9;
+			remoteInfo = Moneyboy;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		05253D59105A21BC90A37EC9 /* MoneyboyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyboyApp.swift; sourceTree = "<group>"; };
+		1A0ED18B9E76A1CA7C4B1CFC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1B4075DEE24243AB47B5CCD6 /* Date+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatting.swift"; sourceTree = "<group>"; };
 		1D51921CDB28E9E1EF94FD29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1DC27B173891084D06D059C8 /* ScenarioDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioDataTests.swift; sourceTree = "<group>"; };
+		205F6E20574978DDF5C53D37 /* BuildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildInfo.swift; sourceTree = "<group>"; };
+		21AD05D769571409A5DE08BF /* FinanceSummaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceSummaryTests.swift; sourceTree = "<group>"; };
 		25BC7DE012314096D2965E0C /* WhatIfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfView.swift; sourceTree = "<group>"; };
 		28ADEBB43D2C803F3B02F3D9 /* ScenarioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioService.swift; sourceTree = "<group>"; };
 		3200FD7A1FFE889252E89CAB /* FinanceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceItem.swift; sourceTree = "<group>"; };
 		3FF3A1609FF4A72623414CB3 /* TransactionListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListSection.swift; sourceTree = "<group>"; };
 		4BE7FA6E44A5C1AB726C3D8B /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		4C9CC5100CA053DF5563B6AC /* MoneyboyTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MoneyboyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		676BA8EDD8C5EA0FE38609D1 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		69588803C67811C55145B9FD /* ItemFormSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFormSheet.swift; sourceTree = "<group>"; };
 		6E57A55C368C6A48DB71B09C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		762F596B28FE659483752CA8 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
+		7A0968B8F46F6DBBEAAAD446 /* SubscriptionBillingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionBillingTests.swift; sourceTree = "<group>"; };
 		807FF498AFC56EEFD6FF5644 /* SubscriptionAlertBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAlertBanner.swift; sourceTree = "<group>"; };
 		87319649EA0B3442618B8416 /* AnalyseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseView.swift; sourceTree = "<group>"; };
 		88447C944ACD3CD9B245546C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,6 +89,7 @@
 		BC3A7BE1845C7C092C5958D7 /* ScenarioData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioData.swift; sourceTree = "<group>"; };
 		BE6E23422318B2C930FFCB02 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		BF7ECB5A4185307F120DF207 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		C8221AED12642FF9DB5D5E15 /* WhatIfViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfViewModelTests.swift; sourceTree = "<group>"; };
 		C96626AB44E72422DA72C239 /* Moneyboy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Moneyboy.entitlements; sourceTree = "<group>"; };
 		CC0AB36EE49639C7909F047A /* AbosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbosView.swift; sourceTree = "<group>"; };
 		D3272E9F480236B57814C72B /* BalanceHeroCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceHeroCard.swift; sourceTree = "<group>"; };
@@ -76,7 +98,6 @@
 		F458B27BD55DF6A362896E07 /* WhatIfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfViewModel.swift; sourceTree = "<group>"; };
 		F5A3E95FF8A4FA9799627CE1 /* Double+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currency.swift"; sourceTree = "<group>"; };
 		F8888ED474A828BEA6E7F8A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		BLDINFO0002000000000001 /* BuildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -137,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				ED3DB9617846870EE517D4B0 /* Moneyboy */,
+				EEE221B1C41A577B132E12E3 /* MoneyboyTests */,
 				DB701D2909F7904C94D55B2D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -203,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				97B0A76A99F855238FEBFC7A /* Moneyboy.app */,
+				4C9CC5100CA053DF5563B6AC /* MoneyboyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -212,10 +235,11 @@
 			children = (
 				1D51921CDB28E9E1EF94FD29 /* AppDelegate.swift */,
 				88447C944ACD3CD9B245546C /* Assets.xcassets */,
-				BLDINFO0002000000000001 /* BuildInfo.swift */,
+				205F6E20574978DDF5C53D37 /* BuildInfo.swift */,
 				F8888ED474A828BEA6E7F8A6 /* Info.plist */,
 				C96626AB44E72422DA72C239 /* Moneyboy.entitlements */,
 				05253D59105A21BC90A37EC9 /* MoneyboyApp.swift */,
+				1A0ED18B9E76A1CA7C4B1CFC /* PrivacyInfo.xcprivacy */,
 				2204EE2838C41F82E166CDD7 /* Extensions */,
 				9CABC04D8B16B15B502A9819 /* Models */,
 				345C315B7BF4DE3512002604 /* Services */,
@@ -223,6 +247,17 @@
 				FADAB901AD8E01A2640D50F3 /* Views */,
 			);
 			path = Moneyboy;
+			sourceTree = "<group>";
+		};
+		EEE221B1C41A577B132E12E3 /* MoneyboyTests */ = {
+			isa = PBXGroup;
+			children = (
+				21AD05D769571409A5DE08BF /* FinanceSummaryTests.swift */,
+				1DC27B173891084D06D059C8 /* ScenarioDataTests.swift */,
+				7A0968B8F46F6DBBEAAAD446 /* SubscriptionBillingTests.swift */,
+				C8221AED12642FF9DB5D5E15 /* WhatIfViewModelTests.swift */,
+			);
+			path = MoneyboyTests;
 			sourceTree = "<group>";
 		};
 		FADAB901AD8E01A2640D50F3 /* Views */ = {
@@ -244,11 +279,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		28C1FACD4B0C1DE999CE98A2 /* MoneyboyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCC670E88D95A87CFF4187AB /* Build configuration list for PBXNativeTarget "MoneyboyTests" */;
+			buildPhases = (
+				9099A5E07460162DB6234BFE /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FDC05F20E585013858FD3D64 /* PBXTargetDependency */,
+			);
+			name = MoneyboyTests;
+			packageProductDependencies = (
+			);
+			productName = MoneyboyTests;
+			productReference = 4C9CC5100CA053DF5563B6AC /* MoneyboyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F8E07CDF3D35F4F88E392EA9 /* Moneyboy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D7133BEF28F2B4A65902538 /* Build configuration list for PBXNativeTarget "Moneyboy" */;
 			buildPhases = (
-				BLDINFO0003000000000001 /* Generate Build Info */,
+				6751CBE414A937CD59268476 /* Generate Build Info */,
 				8C7B59398683571C21D6FBD4 /* Sources */,
 				728AEFEB8B353422FC21C4FF /* Resources */,
 			);
@@ -272,6 +325,10 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
+					28C1FACD4B0C1DE999CE98A2 = {
+						DevelopmentTeam = 8UW4GXUZ76;
+						ProvisioningStyle = Automatic;
+					};
 					F8E07CDF3D35F4F88E392EA9 = {
 						DevelopmentTeam = 8UW4GXUZ76;
 						ProvisioningStyle = Automatic;
@@ -293,6 +350,7 @@
 			projectRoot = "";
 			targets = (
 				F8E07CDF3D35F4F88E392EA9 /* Moneyboy */,
+				28C1FACD4B0C1DE999CE98A2 /* MoneyboyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -303,25 +361,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB1903C75A00BEAAC5F09E50 /* Assets.xcassets in Resources */,
+				AAACB0F2634E2F8A2244C0BB /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BLDINFO0003000000000001 /* Generate Build Info */ = {
+		6751CBE414A937CD59268476 /* Generate Build Info */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 			);
 			name = "Generate Build Info";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "COMMIT_COUNT=$(git -C \"${SRCROOT}\" rev-list --count HEAD 2>/dev/null || echo \"0\")\nBRANCH=$(git -C \"${SRCROOT}\" rev-parse --abbrev-ref HEAD 2>/dev/null || echo \"unknown\")\nHASH=$(git -C \"${SRCROOT}\" rev-parse --short HEAD 2>/dev/null || echo \"unknown\")\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${COMMIT_COUNT}\" \"${SRCROOT}/Moneyboy/Info.plist\"\n\ncat > \"${SRCROOT}/Moneyboy/BuildInfo.swift\" << EOF\n// Auto-generated by build script — do not edit manually\nimport Foundation\n\nenum BuildInfo {\n    static let gitBranch = \"${BRANCH}\"\n    static let gitCommitHash = \"${HASH}\"\n}\nEOF\n";
+			shellScript = "BRANCH=$(git -C \"${PROJECT_DIR}\" rev-parse --abbrev-ref HEAD 2>/dev/null || echo \"unknown\")\nHASH=$(git -C \"${PROJECT_DIR}\" rev-parse --short HEAD 2>/dev/null || echo \"unknown\")\ncat > \"${PROJECT_DIR}/Moneyboy/BuildInfo.swift\" <<SWIFT\n// Auto-generated by build script — do not edit manually\nimport Foundation\n\nenum BuildInfo {\n    static let gitBranch = \"${BRANCH}\"\n    static let gitCommitHash = \"${HASH}\"\n}\nSWIFT\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -330,12 +393,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BLDINFO0001000000000001 /* BuildInfo.swift in Sources */,
 				B0C6D6D880F17A794BBBCC8E /* AbosView.swift in Sources */,
 				A44927F543100D588C25934D /* AnalyseView.swift in Sources */,
 				07DE80D6E11A5A35EF230D7E /* AppDelegate.swift in Sources */,
 				40E7D718645A2BE7C2BA36A0 /* AppViewModel.swift in Sources */,
 				75F2F33082B205EB14C3CA32 /* BalanceHeroCard.swift in Sources */,
+				F65CC697EA44F5B1D42A6354 /* BuildInfo.swift in Sources */,
 				75DAC0B667688D6F56C28852 /* CategoryPickerView.swift in Sources */,
 				5601F942B4D93983D5D5384C /* CurrencyText.swift in Sources */,
 				F98325F4900D416C0E774A7D /* DashboardView.swift in Sources */,
@@ -364,7 +427,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9099A5E07460162DB6234BFE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				236746B528D4F958522A5A2B /* FinanceSummaryTests.swift in Sources */,
+				090D450291481E2F0CCAD844 /* ScenarioDataTests.swift in Sources */,
+				F481721CD5F4FDDCFD1DC57F /* SubscriptionBillingTests.swift in Sources */,
+				FD12769B3B10F4DE6D98A20C /* WhatIfViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FDC05F20E585013858FD3D64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F8E07CDF3D35F4F88E392EA9 /* Moneyboy */;
+			targetProxy = FEC6C85B4CAE929EDA8A31C8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		23262BF9E9A14A8269CCA17E /* Debug */ = {
@@ -436,7 +518,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 8UW4GXUZ76;
 				INFOPLIST_FILE = Moneyboy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -448,6 +530,26 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5D84559BFE93B92784DC1DEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8UW4GXUZ76;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.moneyboy.MoneyboyTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Moneyboy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Moneyboy";
 			};
 			name = Debug;
 		};
@@ -507,13 +609,33 @@
 			};
 			name = Release;
 		};
+		C325C076C3B3F1811651DDFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8UW4GXUZ76;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.moneyboy.MoneyboyTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Moneyboy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Moneyboy";
+			};
+			name = Release;
+		};
 		C86BDF0FD3DD1FE574AB5AF9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 8UW4GXUZ76;
 				INFOPLIST_FILE = Moneyboy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -545,6 +667,15 @@
 			buildConfigurations = (
 				23262BF9E9A14A8269CCA17E /* Debug */,
 				A86229EEFFB129E004E4E700 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BCC670E88D95A87CFF4187AB /* Build configuration list for PBXNativeTarget "MoneyboyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D84559BFE93B92784DC1DEF /* Debug */,
+				C325C076C3B3F1811651DDFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

@@ -15,7 +15,7 @@ struct SubscriptionAlertBanner: View {
                     Text(item.title)
                         .font(.caption)
                     Spacer()
-                    if let date = item.subscriptionNextBilling {
+                    if let date = item.effectiveNextBilling {
                         Text(date.deShort)
                             .font(.caption2)
                             .opacity(0.7)

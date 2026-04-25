@@ -15,7 +15,11 @@ targets:
     info:
       path: Moneyboy/Info.plist
       properties:
-        UILaunchScreen: {}
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSUserNotificationsUsageDescription: Moneyboy reminds you of upcoming subscription billings.
+        UILaunchScreen:
+          UIColorName: LaunchBackground
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         UIApplicationSceneManifest:
