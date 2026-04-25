@@ -2,6 +2,6 @@
 import Foundation
 
 enum BuildInfo {
-    static let gitBranch = "feat/swipe-exclude-dashboard"
-    static let gitCommitHash = "151d741"
+    static let gitBranch = "main"
+    static let gitCommitHash = "1ae3760"
 }

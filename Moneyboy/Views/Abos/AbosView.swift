@@ -49,9 +49,10 @@ struct AbosView: View {
                                                 .background(Color.secondary.opacity(0.2), in: Capsule())
                                                 .foregroundStyle(.primary)
                                         }
-                                        if let nb = item.subscriptionNextBilling {
+                                        if let nb = item.effectiveNextBilling {
                                             let days = nb.daysFromNow
-                                            Text(days <= 2 ? "in \(days)d ⚠️" : nb.deShort)
+                                            let suffix = days <= 2 ? " ⚠️" : ""
+                                            Text("\(nb.deShort) · in \(days)d\(suffix)")
                                                 .font(.caption)
                                                 .foregroundStyle(.secondary)
                                         }

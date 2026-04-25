@@ -51,7 +51,7 @@ class AppViewModel: ObservableObject {
     var upcomingSubscriptions: [FinanceItem] {
         items.filter { item in
             guard item.isSubscription else { return false }
-            let dates = [item.subscriptionNextBilling, item.subscriptionCancellationDeadline].compactMap { $0 }
+            let dates = [item.effectiveNextBilling, item.subscriptionCancellationDeadline].compactMap { $0 }
             return dates.contains { $0.daysFromNow >= 0 && $0.daysFromNow <= 2 }
         }
     }
