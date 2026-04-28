@@ -61,7 +61,7 @@
 /* Begin PBXFileReference section */
 		05253D59105A21BC90A37EC9 /* MoneyboyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyboyApp.swift; sourceTree = "<group>"; };
 		1033C31AC108A005298F53DF /* moneyboy.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = moneyboy.icon; sourceTree = "<group>"; };
-		1A0ED18B9E76A1CA7C4B1CFC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		1A0ED18B9E76A1CA7C4B1CFC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1B4075DEE24243AB47B5CCD6 /* Date+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatting.swift"; sourceTree = "<group>"; };
 		1D51921CDB28E9E1EF94FD29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DC27B173891084D06D059C8 /* ScenarioDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioDataTests.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 		87319649EA0B3442618B8416 /* AnalyseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseView.swift; sourceTree = "<group>"; };
 		88447C944ACD3CD9B245546C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		966E79E1E6A28F4486793CCB /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		97B0A76A99F855238FEBFC7A /* Moneyboy.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Moneyboy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97B0A76A99F855238FEBFC7A /* Moneyboy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moneyboy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6E3FE69E3E15049A7B38E9 /* ScenarioItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioItemRow.swift; sourceTree = "<group>"; };
 		A79E68A8AE17F50C4C2F71FE /* SummaryTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTile.swift; sourceTree = "<group>"; };
 		A97ECDDB455658C163C1E781 /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
@@ -523,7 +523,7 @@
 		493F229D3BC94D068A279D34 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = moneyboy;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
@@ -640,7 +640,7 @@
 		C86BDF0FD3DD1FE574AB5AF9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = moneyboy;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
