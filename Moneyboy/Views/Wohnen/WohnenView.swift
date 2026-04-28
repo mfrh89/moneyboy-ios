@@ -84,7 +84,12 @@ struct WohnenView: View {
                                     }
                                 }
                             }
-                            .swipeActions(edge: .trailing) {
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button(role: .destructive) {
+                                    appViewModel.deleteItem(item)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
                                 Button {
                                     appViewModel.toggleExcluded(item)
                                 } label: {

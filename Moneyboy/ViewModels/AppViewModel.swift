@@ -14,6 +14,9 @@ class AppViewModel: ObservableObject {
     private let hiddenKey = "moneyboy_hidden_categories"
     private let customKey = "moneyboy_custom_categories"
 
+    /// Soft-deleted items live in the trash for this many days, then auto-purge.
+    static let trashRetentionDays = 30
+
     func setup(modelContext: ModelContext) {
         let service = DataService(modelContext: modelContext)
         self.dataService = service
@@ -22,34 +25,44 @@ class AppViewModel: ObservableObject {
             .assign(to: &$items)
         hiddenCategories = Set(UserDefaults.standard.stringArray(forKey: hiddenKey) ?? [])
         customCategories = UserDefaults.standard.stringArray(forKey: customKey) ?? []
+        purgeExpiredTrash()
     }
 
     // MARK: - Computed
 
+    /// All non-deleted items. UI surfaces should consume this instead of `items`.
+    var activeItems: [FinanceItem] { items.filter { !$0.isDeleted } }
+
+    var trashedItems: [FinanceItem] {
+        items
+            .filter { $0.isDeleted }
+            .sorted { ($0.deletedAt ?? .distantPast) > ($1.deletedAt ?? .distantPast) }
+    }
+
     var summary: FinanceSummary { .compute(from: items) }
 
     var incomeItems: [FinanceItem] {
-        items.filter { $0.type == .income }.sorted { $0.amount > $1.amount }
+        activeItems.filter { $0.type == .income }.sorted { $0.amount > $1.amount }
     }
 
     var fixedExpenseItems: [FinanceItem] {
-        items.filter { $0.type == .expense && !$0.isFlexible && !$0.isWohnkosten }.sorted { $0.amount > $1.amount }
+        activeItems.filter { $0.type == .expense && !$0.isFlexible && !$0.isWohnkosten }.sorted { $0.amount > $1.amount }
     }
 
     var flexibleExpenseItems: [FinanceItem] {
-        items.filter { $0.type == .expense && $0.isFlexible && !$0.isWohnkosten }.sorted { $0.amount > $1.amount }
+        activeItems.filter { $0.type == .expense && $0.isFlexible && !$0.isWohnkosten }.sorted { $0.amount > $1.amount }
     }
 
     var wohnkostenItems: [FinanceItem] {
-        items.filter { $0.isWohnkosten }.sorted { $0.amount > $1.amount }
+        activeItems.filter { $0.isWohnkosten }.sorted { $0.amount > $1.amount }
     }
 
     var aboItems: [FinanceItem] {
-        items.filter { $0.isSubscription }.sorted { $0.amount > $1.amount }
+        activeItems.filter { $0.isSubscription }.sorted { $0.amount > $1.amount }
     }
 
     var upcomingSubscriptions: [FinanceItem] {
-        items.filter { item in
+        activeItems.filter { item in
             guard item.isSubscription else { return false }
             let dates = [item.effectiveNextBilling, item.subscriptionCancellationDeadline].compactMap { $0 }
             return dates.contains { $0.daysFromNow >= 0 && $0.daysFromNow <= 2 }
@@ -63,7 +76,7 @@ class AppViewModel: ObservableObject {
     ]
 
     var availableCategories: [String] {
-        let used = Set(items.map { $0.category })
+        let used = Set(activeItems.map { $0.category })
         let all = Set(defaultCategories).union(used).union(customCategories)
         return all.subtracting(hiddenCategories).sorted()
     }
@@ -114,11 +127,37 @@ class AppViewModel: ObservableObject {
         dataService?.updateItem(item)
     }
 
+    /// Moves the item to the trash. Use `permanentlyDelete` to remove for good.
     func deleteItem(_ item: FinanceItem) {
-        dataService?.deleteItem(item)
+        dataService?.softDelete(item)
+    }
+
+    func restoreItem(_ item: FinanceItem) {
+        dataService?.restore(item)
+    }
+
+    func permanentlyDelete(_ item: FinanceItem) {
+        dataService?.permanentlyDelete(item)
+    }
+
+    func emptyTrash() {
+        dataService?.emptyTrash()
     }
 
     func toggleExcluded(_ item: FinanceItem) {
         dataService?.toggleExcluded(item)
+    }
+
+    /// Days remaining before the item auto-purges from trash. Negative if already overdue.
+    func daysUntilPurge(for item: FinanceItem) -> Int {
+        guard let deletedAt = item.deletedAt else { return Self.trashRetentionDays }
+        let cal = Calendar.current
+        let purgeDate = cal.date(byAdding: .day, value: Self.trashRetentionDays, to: deletedAt) ?? deletedAt
+        return cal.dateComponents([.day], from: cal.startOfDay(for: .now), to: cal.startOfDay(for: purgeDate)).day ?? 0
+    }
+
+    private func purgeExpiredTrash() {
+        let cutoff = Calendar.current.date(byAdding: .day, value: -Self.trashRetentionDays, to: .now) ?? .distantPast
+        dataService?.purgeExpired(olderThan: cutoff)
     }
 }

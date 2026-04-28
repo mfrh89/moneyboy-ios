@@ -82,7 +82,19 @@ struct SettingsView: View {
                 }
 
                 Section("Data") {
-                    LabeledContent("Entries", value: "\(appViewModel.items.count)")
+                    LabeledContent("Entries", value: "\(appViewModel.activeItems.count)")
+                    NavigationLink {
+                        TrashView()
+                    } label: {
+                        HStack {
+                            Label("Recently Deleted", systemImage: "trash")
+                            Spacer()
+                            if !appViewModel.trashedItems.isEmpty {
+                                Text("\(appViewModel.trashedItems.count)")
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
                 }
 
                 Section("Legal") {

@@ -118,7 +118,7 @@ struct ItemFormSheet: View {
                 Button("Delete", role: .destructive) { delete() }
                 Button("Cancel", role: .cancel) {}
             } message: {
-                Text("This action cannot be undone.")
+                Text("Item will be moved to Recently Deleted. You can restore it within \(AppViewModel.trashRetentionDays) days.")
             }
         }
         .onAppear { populate() }
