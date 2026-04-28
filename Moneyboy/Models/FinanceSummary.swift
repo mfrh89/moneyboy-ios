@@ -7,11 +7,11 @@ struct FinanceSummary {
 
     static func compute(from items: [FinanceItem]) -> FinanceSummary {
         let income = items
-            .filter { $0.type == .income && !$0.excluded }
+            .filter { $0.type == .income && !$0.excluded && !$0.isDeleted }
             .reduce(0) { $0 + $1.amount }
 
         let expenses = items
-            .filter { $0.type == .expense && !$0.excluded }
+            .filter { $0.type == .expense && !$0.excluded && !$0.isDeleted }
             .reduce(0) { $0 + $1.amount }
 
         return FinanceSummary(

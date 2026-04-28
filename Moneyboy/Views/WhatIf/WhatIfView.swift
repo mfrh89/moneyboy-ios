@@ -24,7 +24,7 @@ struct WhatIfView: View {
                 }
 
                 Section("Expenses") {
-                    ForEach(appViewModel.items.filter { $0.type == .expense }.sorted { $0.amount > $1.amount }) { item in
+                    ForEach(appViewModel.activeItems.filter { $0.type == .expense }.sorted { $0.amount > $1.amount }) { item in
                         ScenarioItemRow(
                             item: item,
                             isExcluded: viewModel.excludedIDs.contains(item.id),
@@ -88,7 +88,7 @@ struct WhatIfView: View {
     private var comparisonSection: some View {
         Section {
             let base = appViewModel.summary
-            let scenario = viewModel.scenarioSummary(base: appViewModel.items)
+            let scenario = viewModel.scenarioSummary(base: appViewModel.activeItems)
             VStack(spacing: 12) {
                 Text("Scenario Comparison")
                     .font(.headline)

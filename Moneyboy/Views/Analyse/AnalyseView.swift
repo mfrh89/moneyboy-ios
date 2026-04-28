@@ -6,7 +6,7 @@ struct AnalyseView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if appViewModel.items.isEmpty {
+                if appViewModel.activeItems.isEmpty {
                     ContentUnavailableView(
                         "No Data",
                         systemImage: "chart.pie",
@@ -14,7 +14,7 @@ struct AnalyseView: View {
                     )
                 } else {
                     ScrollView {
-                        FlowChartView(items: appViewModel.items)
+                        FlowChartView(items: appViewModel.activeItems)
                             .frame(height: 500)
                             .padding(.horizontal, 4)
                     }

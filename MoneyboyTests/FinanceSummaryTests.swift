@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 import SwiftData
 @testable import Moneyboy
@@ -9,14 +10,16 @@ struct FinanceSummaryTests {
         title: String = "Test",
         amount: Double,
         type: FinanceItem.TransactionType,
-        excluded: Bool = false
+        excluded: Bool = false,
+        deletedAt: Date? = nil
     ) -> FinanceItem {
         FinanceItem(
             title: title,
             amount: amount,
             type: type,
             category: "Other",
-            excluded: excluded
+            excluded: excluded,
+            deletedAt: deletedAt
         )
     }
 
@@ -72,5 +75,34 @@ struct FinanceSummaryTests {
         #expect(summary.totalIncome == 3000)
         #expect(summary.totalExpenses == 500)
         #expect(summary.balance == 2500)
+    }
+
+    @Test func deletedItemsAreIgnored() {
+        let items = [
+            makeItem(amount: 3000, type: .income),
+            makeItem(amount: 1000, type: .income, deletedAt: .now),
+            makeItem(amount: 500, type: .expense),
+            makeItem(amount: 300, type: .expense, deletedAt: .now)
+        ]
+        let summary = FinanceSummary.compute(from: items)
+        #expect(summary.totalIncome == 3000)
+        #expect(summary.totalExpenses == 500)
+        #expect(summary.balance == 2500)
+    }
+
+    @Test func sectionLabelMapping() {
+        #expect(makeItem(amount: 1000, type: .income).sectionLabel == "Income")
+
+        let fixed = FinanceItem(title: "x", amount: 100, type: .expense, category: "Other")
+        #expect(fixed.sectionLabel == "Fixed Expense")
+
+        let flex = FinanceItem(title: "x", amount: 100, type: .expense, category: "Other", isFlexible: true)
+        #expect(flex.sectionLabel == "Variable Expense")
+
+        let housing = FinanceItem(title: "x", amount: 100, type: .expense, category: "Housing", isWohnkosten: true)
+        #expect(housing.sectionLabel == "Housing")
+
+        let sub = FinanceItem(title: "x", amount: 100, type: .expense, category: "Subs", isWohnkosten: true, isSubscription: true)
+        #expect(sub.sectionLabel == "Subscription")
     }
 }

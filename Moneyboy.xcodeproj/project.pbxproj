@@ -17,13 +17,13 @@
 		2E8B3D6B614D670FD83C60F3 /* SubscriptionAlertBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FF498AFC56EEFD6FF5644 /* SubscriptionAlertBanner.swift */; };
 		301D768791D9FFA6412F3556 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E23422318B2C930FFCB02 /* RootView.swift */; };
 		3676A8086CF4C275F893FC68 /* ItemFormSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69588803C67811C55145B9FD /* ItemFormSheet.swift */; };
+		3AC91E065393EF455D0560C7 /* TrashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4914DD4EA35BB595CDC0EE3 /* TrashView.swift */; };
 		3B4EA862FAD9C631D0E5AC26 /* Double+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A3E95FF8A4FA9799627CE1 /* Double+Currency.swift */; };
 		3C20983358E0DF926EA36D68 /* FlowChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F6F34DB93DDBA5F3362AE /* FlowChartView.swift */; };
 		40E7D718645A2BE7C2BA36A0 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63E5FE7BE8FD9CD31EF5507 /* AppViewModel.swift */; };
 		5601F942B4D93983D5D5384C /* CurrencyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB43121425407DCA40752DF4 /* CurrencyText.swift */; };
 		56225F642A953477F5603747 /* TransactionListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3A1609FF4A72623414CB3 /* TransactionListSection.swift */; };
 		656574A988DCC094B20CD22F /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE7FA6E44A5C1AB726C3D8B /* DataService.swift */; };
-		6B8D24EC2F9CCA8A007373D5 /* moneyboy.icon in Resources */ = {isa = PBXBuildFile; fileRef = 6B8D24EB2F9CCA8A007373D5 /* moneyboy.icon */; };
 		74D4E68BB3E1CC6E1352E7BC /* WohnenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF604886681013EF2A5CA46 /* WohnenView.swift */; };
 		75DAC0B667688D6F56C28852 /* CategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97ECDDB455658C163C1E781 /* CategoryPickerView.swift */; };
 		75F2F33082B205EB14C3CA32 /* BalanceHeroCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3272E9F480236B57814C72B /* BalanceHeroCard.swift */; };
@@ -37,6 +37,7 @@
 		BB1903C75A00BEAAC5F09E50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88447C944ACD3CD9B245546C /* Assets.xcassets */; };
 		C68A6ACF68FE9277CCAE2DC2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57A55C368C6A48DB71B09C /* SettingsView.swift */; };
 		D092EB834C827094063F1925 /* ScenarioData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3A7BE1845C7C092C5958D7 /* ScenarioData.swift */; };
+		D1240B7355ED5FE5ADCCA2DE /* moneyboy.icon in Resources */ = {isa = PBXBuildFile; fileRef = 1033C31AC108A005298F53DF /* moneyboy.icon */; };
 		D19C7389E6B86292FA132C8A /* MoneyboyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05253D59105A21BC90A37EC9 /* MoneyboyApp.swift */; };
 		E3E9E6106D8E3D1A720F67A2 /* WhatIfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F458B27BD55DF6A362896E07 /* WhatIfViewModel.swift */; };
 		E464F383D143B5955669E25E /* ScenarioItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6E3FE69E3E15049A7B38E9 /* ScenarioItemRow.swift */; };
@@ -59,7 +60,8 @@
 
 /* Begin PBXFileReference section */
 		05253D59105A21BC90A37EC9 /* MoneyboyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyboyApp.swift; sourceTree = "<group>"; };
-		1A0ED18B9E76A1CA7C4B1CFC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		1033C31AC108A005298F53DF /* moneyboy.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = moneyboy.icon; sourceTree = "<group>"; };
+		1A0ED18B9E76A1CA7C4B1CFC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1B4075DEE24243AB47B5CCD6 /* Date+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatting.swift"; sourceTree = "<group>"; };
 		1D51921CDB28E9E1EF94FD29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DC27B173891084D06D059C8 /* ScenarioDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioDataTests.swift; sourceTree = "<group>"; };
@@ -73,7 +75,6 @@
 		4C9CC5100CA053DF5563B6AC /* MoneyboyTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MoneyboyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		676BA8EDD8C5EA0FE38609D1 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		69588803C67811C55145B9FD /* ItemFormSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFormSheet.swift; sourceTree = "<group>"; };
-		6B8D24EB2F9CCA8A007373D5 /* moneyboy.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = moneyboy.icon; sourceTree = "<group>"; };
 		6E57A55C368C6A48DB71B09C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		762F596B28FE659483752CA8 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		7A0968B8F46F6DBBEAAAD446 /* SubscriptionBillingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionBillingTests.swift; sourceTree = "<group>"; };
@@ -81,7 +82,7 @@
 		87319649EA0B3442618B8416 /* AnalyseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseView.swift; sourceTree = "<group>"; };
 		88447C944ACD3CD9B245546C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		966E79E1E6A28F4486793CCB /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		97B0A76A99F855238FEBFC7A /* Moneyboy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moneyboy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97B0A76A99F855238FEBFC7A /* Moneyboy.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Moneyboy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6E3FE69E3E15049A7B38E9 /* ScenarioItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioItemRow.swift; sourceTree = "<group>"; };
 		A79E68A8AE17F50C4C2F71FE /* SummaryTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTile.swift; sourceTree = "<group>"; };
 		A97ECDDB455658C163C1E781 /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
@@ -91,6 +92,7 @@
 		BC3A7BE1845C7C092C5958D7 /* ScenarioData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioData.swift; sourceTree = "<group>"; };
 		BE6E23422318B2C930FFCB02 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		BF7ECB5A4185307F120DF207 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		C4914DD4EA35BB595CDC0EE3 /* TrashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashView.swift; sourceTree = "<group>"; };
 		C8221AED12642FF9DB5D5E15 /* WhatIfViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfViewModelTests.swift; sourceTree = "<group>"; };
 		C96626AB44E72422DA72C239 /* Moneyboy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Moneyboy.entitlements; sourceTree = "<group>"; };
 		CC0AB36EE49639C7909F047A /* AbosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbosView.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				6E57A55C368C6A48DB71B09C /* SettingsView.swift */,
+				C4914DD4EA35BB595CDC0EE3 /* TrashView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -235,12 +238,12 @@
 		ED3DB9617846870EE517D4B0 /* Moneyboy */ = {
 			isa = PBXGroup;
 			children = (
-				6B8D24EB2F9CCA8A007373D5 /* moneyboy.icon */,
 				1D51921CDB28E9E1EF94FD29 /* AppDelegate.swift */,
 				88447C944ACD3CD9B245546C /* Assets.xcassets */,
 				205F6E20574978DDF5C53D37 /* BuildInfo.swift */,
 				F8888ED474A828BEA6E7F8A6 /* Info.plist */,
 				C96626AB44E72422DA72C239 /* Moneyboy.entitlements */,
+				1033C31AC108A005298F53DF /* moneyboy.icon */,
 				05253D59105A21BC90A37EC9 /* MoneyboyApp.swift */,
 				1A0ED18B9E76A1CA7C4B1CFC /* PrivacyInfo.xcprivacy */,
 				2204EE2838C41F82E166CDD7 /* Extensions */,
@@ -365,7 +368,7 @@
 			files = (
 				BB1903C75A00BEAAC5F09E50 /* Assets.xcassets in Resources */,
 				AAACB0F2634E2F8A2244C0BB /* PrivacyInfo.xcprivacy in Resources */,
-				6B8D24EC2F9CCA8A007373D5 /* moneyboy.icon in Resources */,
+				D1240B7355ED5FE5ADCCA2DE /* moneyboy.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +428,7 @@
 				2E8B3D6B614D670FD83C60F3 /* SubscriptionAlertBanner.swift in Sources */,
 				7D3BC571745AF23CEFF57E38 /* SummaryTile.swift in Sources */,
 				56225F642A953477F5603747 /* TransactionListSection.swift in Sources */,
+				3AC91E065393EF455D0560C7 /* TrashView.swift in Sources */,
 				F2346415AB5ED87C533AFE9C /* WhatIfView.swift in Sources */,
 				E3E9E6106D8E3D1A720F67A2 /* WhatIfViewModel.swift in Sources */,
 				74D4E68BB3E1CC6E1352E7BC /* WohnenView.swift in Sources */,
@@ -519,7 +523,7 @@
 		493F229D3BC94D068A279D34 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = moneyboy;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
@@ -636,7 +640,7 @@
 		C86BDF0FD3DD1FE574AB5AF9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = moneyboy;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;

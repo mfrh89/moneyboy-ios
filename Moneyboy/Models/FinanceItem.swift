@@ -17,6 +17,7 @@ final class FinanceItem: Identifiable {
     var subscriptionCancellationDeadline: Date?
     var subscriptionCycleRaw: String?
     var createdAt: Date
+    var deletedAt: Date?
 
     enum TransactionType: String, Codable {
         case income
@@ -74,7 +75,8 @@ final class FinanceItem: Identifiable {
         subscriptionNextBilling: Date? = nil,
         subscriptionCancellationDeadline: Date? = nil,
         subscriptionCycle: SubscriptionCycle? = nil,
-        createdAt: Date = Date()
+        createdAt: Date = Date(),
+        deletedAt: Date? = nil
     ) {
         self.id = id
         self.title = title
@@ -90,5 +92,17 @@ final class FinanceItem: Identifiable {
         self.subscriptionCancellationDeadline = subscriptionCancellationDeadline
         self.subscriptionCycleRaw = subscriptionCycle?.rawValue
         self.createdAt = createdAt
+        self.deletedAt = deletedAt
+    }
+
+    var isDeleted: Bool { deletedAt != nil }
+
+    /// Section label used in the trash view to indicate where this item came from.
+    /// Order matters: subscription wins over housing wins over income/expense flags.
+    var sectionLabel: String {
+        if isSubscription { return "Subscription" }
+        if isWohnkosten { return "Housing" }
+        if type == .income { return "Income" }
+        return isFlexible ? "Variable Expense" : "Fixed Expense"
     }
 }

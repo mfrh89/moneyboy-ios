@@ -24,6 +24,12 @@ Native iOS 26 SwiftUI app for personal finance tracking. Uses the same Firebase 
 - **ViewModels**: `AppViewModel`, `WhatIfViewModel`, `SettingsViewModel`
 - **Views**: SwiftUI views using iOS 26 Liquid Glass (`.glassEffect()`)
 
+## Item Lifecycle
+
+- **Hide**: short trailing swipe → toggles `excluded`. Item stays visible but is greyed out and excluded from totals.
+- **Delete**: full trailing swipe (iOS Mail style) → moves the item to *Recently Deleted* (`deletedAt` timestamp set). Active lists, totals, and subscription reminders ignore deleted items immediately.
+- **Restore / Purge**: Settings → *Recently Deleted*. Leading swipe restores, trailing swipe deletes permanently. Items auto-purge after 30 days; the cutoff runs on app launch.
+
 ## Firestore Paths
 
 Same paths as PWA:

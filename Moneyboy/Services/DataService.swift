@@ -28,9 +28,40 @@ class DataService: ObservableObject {
         save()
     }
 
-    func deleteItem(_ item: FinanceItem) {
+    func softDelete(_ item: FinanceItem) {
+        item.deletedAt = .now
+        save()
+    }
+
+    func restore(_ item: FinanceItem) {
+        item.deletedAt = nil
+        save()
+    }
+
+    func permanentlyDelete(_ item: FinanceItem) {
         modelContext.delete(item)
         save()
+    }
+
+    func emptyTrash() {
+        for item in items where item.isDeleted {
+            modelContext.delete(item)
+        }
+        save()
+    }
+
+    /// Hard-deletes items whose `deletedAt` is older than `cutoff`. Returns count purged.
+    @discardableResult
+    func purgeExpired(olderThan cutoff: Date) -> Int {
+        var count = 0
+        for item in items {
+            if let deletedAt = item.deletedAt, deletedAt < cutoff {
+                modelContext.delete(item)
+                count += 1
+            }
+        }
+        if count > 0 { save() }
+        return count
     }
 
     func toggleExcluded(_ item: FinanceItem) {
