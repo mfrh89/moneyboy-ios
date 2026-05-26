@@ -47,6 +47,8 @@ targets:
         DEVELOPMENT_TEAM: 8UW4GXUZ76
         CODE_SIGN_STYLE: Automatic
         INFOPLIST_FILE: Moneyboy/Info.plist
+        SUPPORTS_MACCATALYST: "YES"
+        TARGETED_DEVICE_FAMILY: "1,2"
 
   MoneyboyTests:
     type: bundle.unit-test

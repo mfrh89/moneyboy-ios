@@ -10,8 +10,10 @@
 		07DE80D6E11A5A35EF230D7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D51921CDB28E9E1EF94FD29 /* AppDelegate.swift */; };
 		090D450291481E2F0CCAD844 /* ScenarioDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC27B173891084D06D059C8 /* ScenarioDataTests.swift */; };
 		0B3ECDFC70AD840B46A1D894 /* ScenarioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADEBB43D2C803F3B02F3D9 /* ScenarioService.swift */; };
+		0B4430D7FD210C68759C6E70 /* FinanceItemDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6546A3A46F18BE689F086B /* FinanceItemDTO.swift */; };
 		0DBF5977FEFEE86271B48AB2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7ECB5A4185307F120DF207 /* NotificationService.swift */; };
 		179C74009AE6B73DDF3432B4 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762F596B28FE659483752CA8 /* FlowLayout.swift */; };
+		1A044CB87BA0924CE1274584 /* BackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AA5776AB828EC10F8B4495 /* BackupService.swift */; };
 		236746B528D4F958522A5A2B /* FinanceSummaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AD05D769571409A5DE08BF /* FinanceSummaryTests.swift */; };
 		25546BCC900656C4902B6208 /* Date+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4075DEE24243AB47B5CCD6 /* Date+Formatting.swift */; };
 		2E8B3D6B614D670FD83C60F3 /* SubscriptionAlertBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FF498AFC56EEFD6FF5644 /* SubscriptionAlertBanner.swift */; };
@@ -61,7 +63,7 @@
 /* Begin PBXFileReference section */
 		05253D59105A21BC90A37EC9 /* MoneyboyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyboyApp.swift; sourceTree = "<group>"; };
 		1033C31AC108A005298F53DF /* moneyboy.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = moneyboy.icon; sourceTree = "<group>"; };
-		1A0ED18B9E76A1CA7C4B1CFC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		1A0ED18B9E76A1CA7C4B1CFC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1B4075DEE24243AB47B5CCD6 /* Date+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatting.swift"; sourceTree = "<group>"; };
 		1D51921CDB28E9E1EF94FD29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DC27B173891084D06D059C8 /* ScenarioDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioDataTests.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 		21AD05D769571409A5DE08BF /* FinanceSummaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceSummaryTests.swift; sourceTree = "<group>"; };
 		25BC7DE012314096D2965E0C /* WhatIfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIfView.swift; sourceTree = "<group>"; };
 		28ADEBB43D2C803F3B02F3D9 /* ScenarioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioService.swift; sourceTree = "<group>"; };
+		2F6546A3A46F18BE689F086B /* FinanceItemDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceItemDTO.swift; sourceTree = "<group>"; };
 		3200FD7A1FFE889252E89CAB /* FinanceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceItem.swift; sourceTree = "<group>"; };
 		3FF3A1609FF4A72623414CB3 /* TransactionListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListSection.swift; sourceTree = "<group>"; };
 		4BE7FA6E44A5C1AB726C3D8B /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -79,10 +82,11 @@
 		762F596B28FE659483752CA8 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		7A0968B8F46F6DBBEAAAD446 /* SubscriptionBillingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionBillingTests.swift; sourceTree = "<group>"; };
 		807FF498AFC56EEFD6FF5644 /* SubscriptionAlertBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAlertBanner.swift; sourceTree = "<group>"; };
+		83AA5776AB828EC10F8B4495 /* BackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupService.swift; sourceTree = "<group>"; };
 		87319649EA0B3442618B8416 /* AnalyseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseView.swift; sourceTree = "<group>"; };
 		88447C944ACD3CD9B245546C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		966E79E1E6A28F4486793CCB /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		97B0A76A99F855238FEBFC7A /* Moneyboy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moneyboy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97B0A76A99F855238FEBFC7A /* Moneyboy.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Moneyboy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6E3FE69E3E15049A7B38E9 /* ScenarioItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioItemRow.swift; sourceTree = "<group>"; };
 		A79E68A8AE17F50C4C2F71FE /* SummaryTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTile.swift; sourceTree = "<group>"; };
 		A97ECDDB455658C163C1E781 /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 		345C315B7BF4DE3512002604 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				83AA5776AB828EC10F8B4495 /* BackupService.swift */,
 				4BE7FA6E44A5C1AB726C3D8B /* DataService.swift */,
 				BF7ECB5A4185307F120DF207 /* NotificationService.swift */,
 				28ADEBB43D2C803F3B02F3D9 /* ScenarioService.swift */,
@@ -190,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				3200FD7A1FFE889252E89CAB /* FinanceItem.swift */,
+				2F6546A3A46F18BE689F086B /* FinanceItemDTO.swift */,
 				AF63380E0DC6C69E29062CFA /* FinanceSummary.swift */,
 				BC3A7BE1845C7C092C5958D7 /* ScenarioData.swift */,
 			);
@@ -404,6 +410,7 @@
 				A44927F543100D588C25934D /* AnalyseView.swift in Sources */,
 				07DE80D6E11A5A35EF230D7E /* AppDelegate.swift in Sources */,
 				40E7D718645A2BE7C2BA36A0 /* AppViewModel.swift in Sources */,
+				1A044CB87BA0924CE1274584 /* BackupService.swift in Sources */,
 				75F2F33082B205EB14C3CA32 /* BalanceHeroCard.swift in Sources */,
 				F65CC697EA44F5B1D42A6354 /* BuildInfo.swift in Sources */,
 				75DAC0B667688D6F56C28852 /* CategoryPickerView.swift in Sources */,
@@ -413,6 +420,7 @@
 				25546BCC900656C4902B6208 /* Date+Formatting.swift in Sources */,
 				3B4EA862FAD9C631D0E5AC26 /* Double+Currency.swift in Sources */,
 				7838AB8EA59A55D1254F8388 /* FinanceItem.swift in Sources */,
+				0B4430D7FD210C68759C6E70 /* FinanceItemDTO.swift in Sources */,
 				A2A77FD3A43E2B7C70947E16 /* FinanceSummary.swift in Sources */,
 				3C20983358E0DF926EA36D68 /* FlowChartView.swift in Sources */,
 				179C74009AE6B73DDF3432B4 /* FlowLayout.swift in Sources */,
@@ -523,7 +531,7 @@
 		493F229D3BC94D068A279D34 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = moneyboy;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
@@ -536,6 +544,7 @@
 				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.moneyboy.app;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -640,7 +649,7 @@
 		C86BDF0FD3DD1FE574AB5AF9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = moneyboy;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
@@ -653,6 +662,7 @@
 				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.moneyboy.app;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

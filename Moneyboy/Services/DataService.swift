@@ -69,6 +69,26 @@ class DataService: ObservableObject {
         save()
     }
 
+    /// Merges DTOs into the store: existing ids are overwritten, new ids are inserted.
+    /// Local-only items are left untouched.
+    @discardableResult
+    func merge(_ dtos: [FinanceItemDTO]) -> ImportSummary {
+        let byId = Dictionary(uniqueKeysWithValues: items.map { ($0.id, $0) })
+        var inserted = 0
+        var updated = 0
+        for dto in dtos {
+            if let existing = byId[dto.id] {
+                dto.apply(to: existing)
+                updated += 1
+            } else {
+                modelContext.insert(dto.makeItem())
+                inserted += 1
+            }
+        }
+        save()
+        return ImportSummary(inserted: inserted, updated: updated)
+    }
+
     private func save() {
         try? modelContext.save()
         fetchItems()
