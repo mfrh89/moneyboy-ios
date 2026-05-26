@@ -90,6 +90,7 @@ struct WohnenView: View {
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
+                                .tint(.red)
                                 Button {
                                     appViewModel.toggleExcluded(item)
                                 } label: {
