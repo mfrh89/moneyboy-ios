@@ -148,6 +148,18 @@ class AppViewModel: ObservableObject {
         dataService?.toggleExcluded(item)
     }
 
+    // MARK: - Backup
+
+    func exportBackup() throws -> Data {
+        try BackupService.encode(items)
+    }
+
+    @discardableResult
+    func importBackup(from data: Data) throws -> ImportSummary {
+        let file = try BackupService.decode(data)
+        return dataService?.merge(file.items) ?? ImportSummary(inserted: 0, updated: 0)
+    }
+
     /// Days remaining before the item auto-purges from trash. Negative if already overdue.
     func daysUntilPurge(for item: FinanceItem) -> Int {
         guard let deletedAt = item.deletedAt else { return Self.trashRetentionDays }

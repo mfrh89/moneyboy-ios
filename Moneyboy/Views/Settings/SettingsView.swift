@@ -1,4 +1,5 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct SettingsView: View {
     @EnvironmentObject private var appViewModel: AppViewModel
@@ -8,6 +9,12 @@ struct SettingsView: View {
     @State private var renameText = ""
     @AppStorage("notificationsEnabled") private var notificationsEnabled = false
     @State private var deletingCategory: String?
+
+    @State private var exportDocument: BackupDocument?
+    @State private var showingExporter = false
+    @State private var showingImporter = false
+    @State private var importResult: ImportSummary?
+    @State private var importErrorMessage: String?
 
     var body: some View {
         NavigationStack {
@@ -95,6 +102,16 @@ struct SettingsView: View {
                             }
                         }
                     }
+                    Button {
+                        prepareExport()
+                    } label: {
+                        Label("Export Data", systemImage: "square.and.arrow.up")
+                    }
+                    Button {
+                        showingImporter = true
+                    } label: {
+                        Label("Import Data", systemImage: "square.and.arrow.down")
+                    }
                 }
 
                 Section("Legal") {
@@ -148,6 +165,94 @@ struct SettingsView: View {
             } message: {
                 Text("\"\(deletingCategory ?? "")\" will be removed from the list.")
             }
+            .fileExporter(
+                isPresented: $showingExporter,
+                document: exportDocument,
+                contentType: .json,
+                defaultFilename: BackupService.suggestedFilename()
+            ) { result in
+                if case .failure(let error) = result {
+                    importErrorMessage = error.localizedDescription
+                }
+                exportDocument = nil
+            }
+            .fileImporter(
+                isPresented: $showingImporter,
+                allowedContentTypes: [.json],
+                allowsMultipleSelection: false
+            ) { result in
+                handleImport(result)
+            }
+            .alert(
+                "Import Complete",
+                isPresented: Binding(
+                    get: { importResult != nil },
+                    set: { if !$0 { importResult = nil } }
+                )
+            ) {
+                Button("OK", role: .cancel) { importResult = nil }
+            } message: {
+                if let r = importResult {
+                    Text("\(r.inserted) added, \(r.updated) updated.")
+                }
+            }
+            .alert(
+                "Import Failed",
+                isPresented: Binding(
+                    get: { importErrorMessage != nil },
+                    set: { if !$0 { importErrorMessage = nil } }
+                )
+            ) {
+                Button("OK", role: .cancel) { importErrorMessage = nil }
+            } message: {
+                Text(importErrorMessage ?? "")
+            }
         }
+    }
+
+    private func prepareExport() {
+        do {
+            let data = try appViewModel.exportBackup()
+            exportDocument = BackupDocument(data: data)
+            showingExporter = true
+        } catch {
+            importErrorMessage = error.localizedDescription
+        }
+    }
+
+    private func handleImport(_ result: Result<[URL], Error>) {
+        switch result {
+        case .failure(let error):
+            importErrorMessage = error.localizedDescription
+        case .success(let urls):
+            guard let url = urls.first else { return }
+            let didStart = url.startAccessingSecurityScopedResource()
+            defer { if didStart { url.stopAccessingSecurityScopedResource() } }
+            do {
+                let data = try Data(contentsOf: url)
+                importResult = try appViewModel.importBackup(from: data)
+            } catch {
+                importErrorMessage = error.localizedDescription
+            }
+        }
+    }
+}
+
+struct BackupDocument: FileDocument {
+    static var readableContentTypes: [UTType] { [.json] }
+    static var writableContentTypes: [UTType] { [.json] }
+
+    var data: Data
+
+    init(data: Data) {
+        self.data = data
+    }
+
+    init(configuration: ReadConfiguration) throws {
+        self.data = configuration.file.regularFileContents ?? Data()
+    }
+
+    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        FileWrapper(regularFileWithContents: data)
     }
 }
