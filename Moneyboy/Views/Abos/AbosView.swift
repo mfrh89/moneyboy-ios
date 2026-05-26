@@ -3,6 +3,7 @@ import SwiftUI
 struct AbosView: View {
     @EnvironmentObject private var appViewModel: AppViewModel
     @State private var editingItem: FinanceItem?
+    @State private var showingAddSheet = false
 
     private var monthlyTotal: Double {
         appViewModel.aboItems.filter { !$0.excluded }.reduce(0) { sum, item in
@@ -18,7 +19,7 @@ struct AbosView: View {
             List {
                 Section {
                     VStack(spacing: 6) {
-                        Text("Monthly Costs")
+                        Text("Monthly Subscription Costs")
                             .font(.caption2.weight(.medium))
                             .tracking(0.5)
                             .foregroundStyle(.secondary)
@@ -84,6 +85,18 @@ struct AbosView: View {
             .listStyle(.insetGrouped)
             .tint(.primary)
             .navigationTitle("Subscriptions")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button { showingAddSheet = true } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            .sheet(isPresented: $showingAddSheet) {
+                ItemFormSheet(lockedSubscription: true)
+                    .presentationDetents([.large])
+                    .presentationDragIndicator(.visible)
+            }
             .sheet(item: $editingItem) { item in
                 ItemFormSheet(existingItem: item)
                     .presentationDetents([.large])
