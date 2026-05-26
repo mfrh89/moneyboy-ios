@@ -199,7 +199,7 @@ struct DashboardView: View {
                     .foregroundStyle(item.excluded ? .secondary : .primary)
                     .strikethrough(item.excluded)
                 if item.isSplit {
-                    Text("split")
+                    Text("½ of \((item.amount * 2).eurFormatted)")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                 }
