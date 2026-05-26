@@ -8,6 +8,8 @@ struct ItemFormSheet: View {
     var existingItem: FinanceItem?
     /// Pre-set isWohnkosten when adding from WohnenView
     var presetWohnkosten: Bool = false
+    /// Force isSubscription = true and hide the toggle (entry from Subscriptions tab)
+    var lockedSubscription: Bool = false
 
     @State private var title = ""
     @State private var amountText = ""
@@ -76,6 +78,7 @@ struct ItemFormSheet: View {
                         }
                     }
                     Toggle("Subscription", isOn: $isSubscription.animation())
+                        .disabled(lockedSubscription)
                 }
 
                 if isSubscription {
@@ -125,10 +128,17 @@ struct ItemFormSheet: View {
     }
 
     private func populate() {
-        if presetWohnkosten && existingItem == nil {
-            isWohnkosten = true
-            category = "Housing"
-            return
+        if existingItem == nil {
+            if presetWohnkosten {
+                isWohnkosten = true
+                category = "Housing"
+            }
+            if lockedSubscription {
+                isSubscription = true
+            }
+            if presetWohnkosten || lockedSubscription {
+                return
+            }
         }
         guard let item = existingItem else { return }
         title = item.title
